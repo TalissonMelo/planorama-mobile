@@ -14,8 +14,7 @@ class SignInScreen extends StatelessWidget {
               child: Container(
             color: Colors.grey,
           )),
-          Expanded(
-              child: Container(
+          Container(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
             decoration: const BoxDecoration(
                 color: Colors.white,
@@ -51,10 +50,31 @@ class SignInScreen extends StatelessWidget {
                         'Esqueceu a senha?',
                         style: TextStyle(color: Colors.blue),
                       )),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Divider(
+                      color: Colors.grey.withAlpha(90),
+                      thickness: 2,
+                    )),
+                SizedBox(
+                  height: 50,
+                  child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(
+                          width: 2,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Criar conta',
+                        style: TextStyle(color: Colors.grey, fontSize: 18),
+                      )),
                 )
               ],
             ),
-          ))
+          )
         ],
       ),
     );
