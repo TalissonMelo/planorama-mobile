@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -20,19 +21,15 @@ class SignInScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
             child: Column(
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                    isDense: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18)),
-                  ),
+              children: const [
+                CustomTextField(
+                  icon: Icons.email,
+                  label: 'Email',
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18)),
-                  ),
+                CustomTextField(
+                  icon: Icons.lock,
+                  label: 'Senha',
+                  isObscure: true,
                 )
               ],
             ),
