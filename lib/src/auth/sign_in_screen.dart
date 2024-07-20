@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/auth/sign_up_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -71,7 +72,13 @@ class SignInScreen extends StatelessWidget {
                             color: Colors.grey,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (c) {
+                              return SignUpScreen();
+                            }),
+                          );
+                        },
                         child: const Text(
                           'Criar conta',
                           style: TextStyle(color: Colors.grey, fontSize: 18),
