@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/auth/sign_up_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/recoverPassword/send_phone_code.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -51,7 +52,13 @@ class SignInScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (c) {
+                              return SendPhoneCode();
+                            }),
+                          );
+                        },
                         child: const Text(
                           'Esqueceu a senha?',
                           style: TextStyle(color: Colors.blue),
