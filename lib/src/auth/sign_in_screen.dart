@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/auth/sign_up_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/initial/base.dart';
 import 'package:liberbox_mobile/src/recoverPassword/send_phone_code.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -44,7 +45,13 @@ class SignInScreen extends StatelessWidget {
                             backgroundColor: Colors.grey,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (c) {
+                              return const Base();
+                            }),
+                          );
+                        },
                         child: const Text('Entrar',
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white))),
@@ -55,7 +62,7 @@ class SignInScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (c) {
-                              return SendPhoneCode();
+                              return const SendPhoneCode();
                             }),
                           );
                         },
@@ -82,7 +89,7 @@ class SignInScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (c) {
-                              return SignUpScreen();
+                              return const SignUpScreen();
                             }),
                           );
                         },
