@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/profile/profile.dart';
 
 class Base extends StatefulWidget {
   const Base({super.key});
@@ -21,7 +22,7 @@ class _BaseState extends State<Base> {
           Container(color: Colors.white.withAlpha(100)),
           Container(color: Colors.grey.withAlpha(100)),
           Container(color: Colors.green.withAlpha(100)),
-          Container(color: Colors.blue.withAlpha(100)),
+          const Profile(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
