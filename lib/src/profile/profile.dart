@@ -3,9 +3,14 @@ import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final phoneFormatter = MaskTextInputFormatter(
@@ -34,12 +39,12 @@ class Profile extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: [
-          CustomTextField(
+          const CustomTextField(
             icon: Icons.email,
             label: "Email",
             readOnly: true,
           ),
-          CustomTextField(icon: Icons.person, label: "Nome"),
+          const CustomTextField(icon: Icons.person, label: "Nome"),
           CustomTextField(
             icon: Icons.phone,
             label: "Telefone",
@@ -60,12 +65,7 @@ class Profile extends StatelessWidget {
                   style: TextStyle(color: Colors.grey, fontSize: 18),
                 )),
           ),
-          Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Divider(
-                color: Colors.grey.withAlpha(90),
-                thickness: 2,
-              )),
+          const Padding(padding: EdgeInsets.only(bottom: 10)),
           SizedBox(
             height: 50,
             child: ElevatedButton(
@@ -73,12 +73,84 @@ class Profile extends StatelessWidget {
                     backgroundColor: Colors.grey,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18))),
-                onPressed: () {},
+                onPressed: () {
+                  updatePassword();
+                },
                 child: const Text('Atualizar senha',
                     style: TextStyle(fontSize: 18, color: Colors.white))),
           )
         ],
       ),
     );
+  }
+
+  Future<bool?> updatePassword() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        child: Text(
+                          'Atualização de senha',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const CustomTextField(
+                        icon: Icons.lock,
+                        label: 'Senha atual',
+                        isSecret: true,
+                      ),
+                      const CustomTextField(
+                        icon: Icons.lock_outline,
+                        label: 'Nova senha',
+                        isSecret: true,
+                      ),
+                      const CustomTextField(
+                        icon: Icons.lock_outline,
+                        label: 'Confirmar senha',
+                        isSecret: true,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                            onPressed: () {},
+                            child: const Text('Atualizar',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white))),
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
