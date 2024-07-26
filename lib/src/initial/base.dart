@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/legend/legend.dart';
 import 'package:liberbox_mobile/src/profile/profile.dart';
 
 class Base extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BaseState extends State<Base> {
         controller: pageController,
         children: [
           Container(color: Colors.white.withAlpha(100)),
-          Container(color: Colors.grey.withAlpha(100)),
+          const Legend(),
           Container(color: Colors.green.withAlpha(100)),
           const Profile(),
         ],
