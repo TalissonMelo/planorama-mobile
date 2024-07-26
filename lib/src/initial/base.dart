@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/home/home.dart';
 import 'package:liberbox_mobile/src/legend/legend.dart';
 import 'package:liberbox_mobile/src/profile/profile.dart';
+import 'package:liberbox_mobile/src/schedule/schedule.dart';
 
 class Base extends StatefulWidget {
   const Base({super.key});
@@ -19,11 +21,11 @@ class _BaseState extends State<Base> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: [
-          Container(color: Colors.white.withAlpha(100)),
-          const Legend(),
-          Container(color: Colors.green.withAlpha(100)),
-          const Profile(),
+        children: const [
+          Home(),
+          Legend(),
+          Schedule(),
+          Profile(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
