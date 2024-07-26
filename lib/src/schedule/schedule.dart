@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/sessions/session.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Schedule extends StatefulWidget {
@@ -41,44 +42,53 @@ class _ScheduleState extends State<Schedule> {
         itemCount: schedules.length,
         itemBuilder: (context, index) {
           final schedule = schedules[index];
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.event, color: Colors.blue),
-                      const SizedBox(width: 8),
-                      Text(
-                        schedule['name']!,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(Icons.access_time, color: Colors.blue),
-                      const SizedBox(width: 8),
-                      Text('Início: ${schedule['start']!}'),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      const Icon(Icons.access_time, color: Colors.blue),
-                      const SizedBox(width: 8),
-                      Text('Fim: ${schedule['end']!}'),
-                    ],
-                  ),
-                ],
+          return ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (c) {
+                  return const Session();
+                }),
+              );
+            },
+            child: Card(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.event, color: Colors.blue),
+                        const SizedBox(width: 8),
+                        Text(
+                          schedule['name']!,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        const Icon(Icons.access_time, color: Colors.blue),
+                        const SizedBox(width: 8),
+                        Text('Início: ${schedule['start']!}'),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        const Icon(Icons.access_time, color: Colors.blue),
+                        const SizedBox(width: 8),
+                        Text('Fim: ${schedule['end']!}'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
