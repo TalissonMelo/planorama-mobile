@@ -3,6 +3,7 @@ import 'package:liberbox_mobile/src/home/home.dart';
 import 'package:liberbox_mobile/src/legend/legend.dart';
 import 'package:liberbox_mobile/src/profile/profile.dart';
 import 'package:liberbox_mobile/src/schedule/schedule.dart';
+import 'package:liberbox_mobile/src/sessions/session.dart';
 
 class Base extends StatefulWidget {
   const Base({super.key});
@@ -21,12 +22,7 @@ class _BaseState extends State<Base> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: const [
-          Home(),
-          Legend(),
-          Schedule(),
-          Profile(),
-        ],
+        children: const [Home(), Legend(), Schedule(), Profile(), Session()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
