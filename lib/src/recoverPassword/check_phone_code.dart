@@ -10,7 +10,7 @@ class CheckPhoneCode extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blue,
         body: SingleChildScrollView(
             child: SizedBox(
                 height: size.height,
@@ -64,14 +64,14 @@ class CheckPhoneCode extends StatelessWidget {
                                 height: 50,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.grey,
+                                        backgroundColor: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(18))),
                                     onPressed: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(builder: (c) {
-                                          return RecoverPassword();
+                                          return const RecoverPassword();
                                         }),
                                       );
                                     },

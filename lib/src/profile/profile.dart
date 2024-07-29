@@ -18,7 +18,7 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blue,
         title: const Text('Perfil do usuário',
             style: TextStyle(color: Colors.white)),
         actions: [
@@ -56,13 +56,13 @@ class _ProfileState extends State<Profile> {
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(
                     width: 2,
-                    color: Colors.grey,
+                    color: Colors.blue,
                   ),
                 ),
                 onPressed: () {},
                 child: const Text(
                   'Atualizar Perfil',
-                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                  style: TextStyle(color: Colors.blue, fontSize: 18),
                 )),
           ),
           const Padding(padding: EdgeInsets.only(bottom: 10)),
@@ -70,7 +70,7 @@ class _ProfileState extends State<Profile> {
             height: 50,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18))),
                 onPressed: () {
@@ -127,7 +127,7 @@ class _ProfileState extends State<Profile> {
                         height: 50,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey,
+                                backgroundColor: Colors.blue,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20))),
                             onPressed: () {},

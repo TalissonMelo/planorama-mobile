@@ -12,7 +12,7 @@ class SignInScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.blue,
       body: SingleChildScrollView(
           child: SizedBox(
         height: size.height,
@@ -42,7 +42,7 @@ class SignInScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
+                            backgroundColor: Colors.blue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))),
                         onPressed: () {
@@ -83,7 +83,7 @@ class SignInScreen extends StatelessWidget {
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
                             width: 2,
-                            color: Colors.grey,
+                            color: Colors.blue,
                           ),
                         ),
                         onPressed: () {
@@ -95,7 +95,7 @@ class SignInScreen extends StatelessWidget {
                         },
                         child: const Text(
                           'Criar conta',
-                          style: TextStyle(color: Colors.grey, fontSize: 18),
+                          style: TextStyle(color: Colors.blue, fontSize: 18),
                         )),
                   )
                 ],

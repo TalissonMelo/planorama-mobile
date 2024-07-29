@@ -13,7 +13,7 @@ class SignUpScreen extends StatelessWidget {
         mask: '## # ####-####', filter: {'#': RegExp(r'[0-9]')});
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.blue,
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
@@ -62,7 +62,7 @@ class SignUpScreen extends StatelessWidget {
                           height: 50,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.grey,
+                                  backgroundColor: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                               onPressed: () {},

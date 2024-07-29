@@ -14,7 +14,7 @@ class _LegendState extends State<Legend> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blue,
         title: const Text('Legendas', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
@@ -30,12 +30,38 @@ class _LegendState extends State<Legend> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(0, 20, 5, 0),
         children: const [
-          ListTile(
-              leading: Icon(Icons.label, color: Color(0xFF000000), size: 50),
-              title: Text(
-                'Exemplo de descrição de legenda',
-                style: TextStyle(color: Colors.black, fontSize: 18),
-              )),
+          Card(
+            child: ListTile(
+                leading: Icon(Icons.label, color: Color(0xFF000000), size: 50),
+                title: Text(
+                  'Inglês',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )),
+          ),
+          Card(
+            child: ListTile(
+                leading: Icon(Icons.label, color: Colors.purple, size: 50),
+                title: Text(
+                  'português',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )),
+          ),
+          Card(
+            child: ListTile(
+                leading: Icon(Icons.label, color: Colors.green, size: 50),
+                title: Text(
+                  'Geografia',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )),
+          ),
+          Card(
+            child: ListTile(
+                leading: Icon(Icons.label, color: Colors.grey, size: 50),
+                title: Text(
+                  'Historia',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                )),
+          ),
         ],
       ),
     );
@@ -95,7 +121,7 @@ class _LegendState extends State<Legend> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

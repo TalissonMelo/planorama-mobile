@@ -25,7 +25,7 @@ class _ScheduleState extends State<Schedule> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blue,
         title: const Text('Agendas', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
@@ -42,12 +42,13 @@ class _ScheduleState extends State<Schedule> {
         itemCount: schedules.length,
         itemBuilder: (context, index) {
           final schedule = schedules[index];
-          return ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (c) {
-                  return const Session();
-                }),
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Session(),
+                ),
               );
             },
             child: Card(
@@ -154,7 +155,7 @@ class _ScheduleState extends State<Schedule> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
+                          backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -175,7 +176,10 @@ class _ScheduleState extends State<Schedule> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: const Icon(Icons.close),
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ),
                 ),
               ),
             ],

@@ -33,7 +33,7 @@ class _BaseState extends State<Base> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blue,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withAlpha(100),
         items: const [
