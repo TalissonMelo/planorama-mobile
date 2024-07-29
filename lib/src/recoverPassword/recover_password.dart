@@ -53,6 +53,7 @@ class RecoverPassword extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 50,
+                          width: double.infinity,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue,

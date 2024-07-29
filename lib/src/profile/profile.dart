@@ -125,6 +125,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       SizedBox(
                         height: 50,
+                        width: double.infinity,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blue,

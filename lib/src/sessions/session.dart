@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:liberbox_mobile/src/chat/chat.dart';
+import 'package:liberbox_mobile/src/components/custom_card.dart';
+import 'package:liberbox_mobile/src/sessions/create_session.dart';
 import 'package:liberbox_mobile/src/sessions/model/legend_color.dart';
 import 'package:liberbox_mobile/src/sessions/model/session_response.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -85,13 +87,25 @@ class _SessionState extends State<Session> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title:
             const Text('Agendamentos', style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreateSession(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add_circle),
+            color: Colors.white,
+          ),
+        ],
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
@@ -187,50 +201,11 @@ class _SessionState extends State<Session> {
                           ),
                         );
                       },
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Icon(Icons.event, color: Colors.black),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    event.title,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  const Icon(Icons.access_time,
-                                      color: Colors.blue),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                      'Início: ${event.start.hour}:${event.start.minute.toString().padLeft(2, '0')} - Fim: ${event.end.hour}:${event.end.minute.toString().padLeft(2, '0')}'),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  const Icon(Icons.description,
-                                      color: Colors.blue),
-                                  const SizedBox(width: 8),
-                                  Text(event.description),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: CustomCard(
+                        title: event.title,
+                        start: event.start,
+                        end: event.end,
+                        description: event.description,
                       ),
                     ),
                   );

@@ -62,6 +62,7 @@ class CheckPhoneCode extends StatelessWidget {
                                   icon: Icons.lock, label: 'Código'),
                               SizedBox(
                                 height: 50,
+                                width: double.infinity,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blue,

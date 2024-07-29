@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/components/custom_card.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/sessions/session.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -11,14 +12,17 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
-  final List<Map<String, String>> schedules = [
-    {'name': 'Escola Estadual 1º I ', 'start': '07:30', 'end': '12:30'},
-    {'name': 'Escola Estadual 1º II ', 'start': '07:30', 'end': '12:30'},
-    {'name': 'Escola Estadual 2º I ', 'start': '07:30', 'end': '12:30'},
-    {'name': 'Escola Estadual 2º II ', 'start': '07:30', 'end': '12:30'},
-    {'name': 'Escola Estadual 3º II ', 'start': '07:30', 'end': '12:30'},
-    {'name': 'Escola Estadual - Logística', 'start': '19:00', 'end': '22:30'},
-    {'name': 'Escola Estadual - Informática', 'start': '19:00', 'end': '22:30'},
+  final List<Map<String, dynamic>> schedules = [
+    {
+      'name': 'Escola Estadual 1º I ',
+      'start': DateTime.now(),
+      'end': DateTime.now().add(const Duration(hours: 1)),
+    },
+    {
+      'name': 'Escola Estadual 1º I ',
+      'start': DateTime.now(),
+      'end': DateTime.now().add(const Duration(hours: 1)),
+    },
   ];
 
   @override
@@ -43,56 +47,18 @@ class _ScheduleState extends State<Schedule> {
         itemBuilder: (context, index) {
           final schedule = schedules[index];
           return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Session(),
-                ),
-              );
-            },
-            child: Card(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.event, color: Colors.blue),
-                        const SizedBox(width: 8),
-                        Text(
-                          schedule['name']!,
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        const Icon(Icons.access_time, color: Colors.blue),
-                        const SizedBox(width: 8),
-                        Text('Início: ${schedule['start']!}'),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        const Icon(Icons.access_time, color: Colors.blue),
-                        const SizedBox(width: 8),
-                        Text('Fim: ${schedule['end']!}'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Session(),
+                  ),
+                );
+              },
+              child: CustomCard(
+                  title: schedule['name']!,
+                  start: schedule['start']!,
+                  end: schedule['end']!));
         },
       ),
     );
@@ -153,6 +119,7 @@ class _ScheduleState extends State<Schedule> {
                     const SizedBox(height: 16),
                     SizedBox(
                       height: 50,
+                      width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,

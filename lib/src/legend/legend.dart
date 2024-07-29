@@ -38,30 +38,6 @@ class _LegendState extends State<Legend> {
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 )),
           ),
-          Card(
-            child: ListTile(
-                leading: Icon(Icons.label, color: Colors.purple, size: 50),
-                title: Text(
-                  'português',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                )),
-          ),
-          Card(
-            child: ListTile(
-                leading: Icon(Icons.label, color: Colors.green, size: 50),
-                title: Text(
-                  'Geografia',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                )),
-          ),
-          Card(
-            child: ListTile(
-                leading: Icon(Icons.label, color: Colors.grey, size: 50),
-                title: Text(
-                  'Historia',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                )),
-          ),
         ],
       ),
     );
@@ -119,6 +95,7 @@ class _LegendState extends State<Legend> {
                 ),
                 SizedBox(
                   height: 50,
+                  width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,

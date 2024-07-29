@@ -46,6 +46,7 @@ class SendPhoneCode extends StatelessWidget {
                             icon: Icons.email, label: 'Email'),
                         SizedBox(
                           height: 50,
+                          width: double.infinity,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue,
