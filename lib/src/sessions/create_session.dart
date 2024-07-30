@@ -52,29 +52,12 @@ class _CreateSessionState extends State<CreateSession> {
               icon: Icons.description,
               label: 'descrição',
             ),
-            TextFormField(
-              controller: startTimeController,
-              decoration: const InputDecoration(
-                labelText: 'Horário Inicial',
-                icon: Icon(Icons.access_time),
-              ),
-              keyboardType: TextInputType.datetime,
-              inputFormatters: [timeFormatter],
-            ),
-            TextFormField(
-              controller: endTimeController,
-              decoration: const InputDecoration(
-                labelText: 'Horário Final',
-                icon: Icon(Icons.access_time),
-              ),
-              keyboardType: TextInputType.datetime,
-              inputFormatters: [timeFormatter],
-            ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             DropdownButtonFormField<IconDataItem>(
               decoration: InputDecoration(
                 labelText: 'Legenda',
-                icon: const Icon(Icons.label),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
                 suffixIcon: CircleAvatar(
                   backgroundColor: _selectedIconDataItem?.color ?? Colors.red,
                   child: const Icon(Icons.check, color: Colors.white),
@@ -91,6 +74,26 @@ class _CreateSessionState extends State<CreateSession> {
                   _selectedIconDataItem = newValue;
                 });
               },
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: startTimeController,
+              decoration: const InputDecoration(
+                labelText: 'Horário Inicial',
+                icon: Icon(Icons.access_time),
+              ),
+              keyboardType: TextInputType.datetime,
+              inputFormatters: [timeFormatter],
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: endTimeController,
+              decoration: const InputDecoration(
+                labelText: 'Horário Final',
+                icon: Icon(Icons.access_time),
+              ),
+              keyboardType: TextInputType.datetime,
+              inputFormatters: [timeFormatter],
             ),
             const SizedBox(height: 16),
             SizedBox(

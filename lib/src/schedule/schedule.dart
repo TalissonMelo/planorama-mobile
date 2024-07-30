@@ -41,25 +41,51 @@ class _ScheduleState extends State<Schedule> {
           ),
         ],
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: schedules.length,
-        itemBuilder: (context, index) {
-          final schedule = schedules[index];
-          return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Session(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
+                  isDense: true,
+                  hintText: 'Pesquise aqui...',
+                  hintStyle:
+                      TextStyle(color: Colors.grey.shade700, fontSize: 14),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 21,
                   ),
-                );
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(60),
+                      borderSide:
+                          const BorderSide(width: 0, style: BorderStyle.none))),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: schedules.length,
+              itemBuilder: (context, index) {
+                final schedule = schedules[index];
+                return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Session(),
+                        ),
+                      );
+                    },
+                    child: CustomCard(
+                        title: schedule['name']!,
+                        start: schedule['start']!,
+                        end: schedule['end']!));
               },
-              child: CustomCard(
-                  title: schedule['name']!,
-                  start: schedule['start']!,
-                  end: schedule['end']!));
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

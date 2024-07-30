@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/sign_up_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/initial/base.dart';
 import 'package:liberbox_mobile/src/recoverPassword/send_phone_code.dart';
+import 'package:liberbox_mobile/src/user/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
