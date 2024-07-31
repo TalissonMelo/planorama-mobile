@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
+import 'package:liberbox_mobile/src/splash/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'liberbox',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const SignInScreen(),
+      home: const Splash(),
     );
   }
 }
