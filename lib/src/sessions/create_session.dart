@@ -30,6 +30,15 @@ class _CreateSessionState extends State<CreateSession> {
         backgroundColor: Colors.blue,
         title: const Text('Cadastrar Agenda',
             style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

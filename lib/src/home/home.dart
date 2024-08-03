@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
+        automaticallyImplyLeading: false,
         title: const Text('liberbox', style: TextStyle(color: Colors.white)),
       ),
       body: Center(

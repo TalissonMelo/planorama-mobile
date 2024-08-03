@@ -55,7 +55,7 @@ class SendPhoneCode extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(builder: (c) {
-                                    return CheckPhoneCode();
+                                    return const CheckPhoneCode();
                                   }),
                                 );
                               },
@@ -68,18 +68,6 @@ class SendPhoneCode extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned(
-                  top: 10,
-                  left: 10,
-                  child: SafeArea(
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.arrow_back_ios),
-                      color: Colors.white,
-                    ),
-                  ))
             ],
           ),
         ),

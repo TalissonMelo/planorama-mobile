@@ -30,6 +30,7 @@ class _ScheduleState extends State<Schedule> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
+        automaticallyImplyLeading: false,
         title: const Text('Agendas', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 
 class RecoverPassword extends StatelessWidget {
@@ -59,7 +60,13 @@ class RecoverPassword extends StatelessWidget {
                                   backgroundColor: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (c) {
+                                    return const SignInScreen();
+                                  }),
+                                );
+                              },
                               child: const Text('Redefinir a senha',
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white))),
@@ -69,18 +76,6 @@ class RecoverPassword extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned(
-                  top: 10,
-                  left: 10,
-                  child: SafeArea(
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.arrow_back_ios),
-                      color: Colors.white,
-                    ),
-                  ))
             ],
           ),
         ),

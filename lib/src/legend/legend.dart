@@ -15,6 +15,7 @@ class _LegendState extends State<Legend> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
+        automaticallyImplyLeading: false,
         title: const Text('Legendas', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(

@@ -19,6 +19,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
+        automaticallyImplyLeading: false,
         title: const Text('Perfil do usuário',
             style: TextStyle(color: Colors.white)),
         actions: [
