@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/splash/splash.dart';
+import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
+import 'package:liberbox_mobile/src/pages_routes/pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,10 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'liberbox',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Splash(),
+      theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white.withAlpha(190)),
+      initialRoute: PagesRoutes.splashRoute,
+      getPages: Pages.pages,
     );
   }
 }
