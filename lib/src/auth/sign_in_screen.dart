@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/initial/base.dart';
-import 'package:liberbox_mobile/src/recoverPassword/send_phone_code.dart';
-import 'package:liberbox_mobile/src/user/sign_up_screen.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -41,30 +40,26 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 50,
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18))),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (c) {
-                              return const Base();
-                            }),
-                          );
-                        },
-                        child: const Text('Entrar',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.white))),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.offNamed(PagesRoutes.baseRoute);
+                      },
+                      child: const Text(
+                        'Entrar',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (c) {
-                              return const SendPhoneCode();
-                            }),
-                          );
+                          Get.toNamed(PagesRoutes.phoneCodeRoute);
                         },
                         child: const Text(
                           'Esqueceu a senha?',
@@ -80,23 +75,20 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 50,
                     child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                            width: 2,
-                            color: Colors.blue,
-                          ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(
+                          width: 2,
+                          color: Colors.blue,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (c) {
-                              return const SignUpScreen();
-                            }),
-                          );
-                        },
-                        child: const Text(
-                          'Criar conta',
-                          style: TextStyle(color: Colors.blue, fontSize: 18),
-                        )),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(PagesRoutes.signUpRoute);
+                      },
+                      child: const Text(
+                        'Criar conta',
+                        style: TextStyle(color: Colors.blue, fontSize: 18),
+                      ),
+                    ),
                   )
                 ],
               ),

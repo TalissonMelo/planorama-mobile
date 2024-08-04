@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
+import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -14,10 +15,7 @@ class _SplashState extends State<Splash> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) {
-        return const SignInScreen();
-      }));
+      Get.offNamed(PagesRoutes.loginInRoute);
     });
   }
 

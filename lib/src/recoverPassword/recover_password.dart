@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
+import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
 class RecoverPassword extends StatelessWidget {
   const RecoverPassword({super.key});
@@ -61,16 +63,13 @@ class RecoverPassword extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                               onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (c) {
-                                    return const SignInScreen();
-                                  }),
-                                );
+                                Get.offNamed(PagesRoutes.loginInRoute);
                               },
                               child: const Text('Redefinir a senha',
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.white))),
-                        )
+                        ),
+                        const CustomReturnedLogin(),
                       ],
                     ),
                   ),

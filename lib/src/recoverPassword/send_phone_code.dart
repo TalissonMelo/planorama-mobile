@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/recoverPassword/check_phone_code.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
 class SendPhoneCode extends StatelessWidget {
   const SendPhoneCode({super.key});
@@ -48,21 +50,21 @@ class SendPhoneCode extends StatelessWidget {
                           height: 50,
                           width: double.infinity,
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (c) {
-                                    return const CheckPhoneCode();
-                                  }),
-                                );
-                              },
-                              child: const Text('Continuar',
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white))),
-                        )
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
+                            onPressed: () {
+                              Get.offNamed(PagesRoutes.checkPhoneCodeRoute);
+                            },
+                            child: const Text(
+                              'Continuar',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        const CustomReturnedLogin(),
                       ],
                     ),
                   ),
