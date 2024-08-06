@@ -16,7 +16,7 @@ abstract class Pages {
     ),
     GetPage(
       name: PagesRoutes.loginInRoute,
-      page: () => const SignInScreen(),
+      page: () => SignInScreen(),
     ),
     GetPage(
       name: PagesRoutes.signUpRoute,
