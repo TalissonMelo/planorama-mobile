@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
+
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,7 @@ class SignInScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomTextField(
+                      controller: emailController,
                       icon: Icons.email,
                       label: 'Email',
                       validator: (email) {
@@ -44,6 +49,7 @@ class SignInScreen extends StatelessWidget {
                       },
                     ),
                     CustomTextField(
+                      controller: passwordController,
                       icon: Icons.lock,
                       label: 'Senha',
                       isSecret: true,
@@ -56,22 +62,35 @@ class SignInScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Get.offNamed(PagesRoutes.baseRoute);
-                          }
+                      child: GetX<AuthController>(
+                        builder: (authController) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                            ),
+                            onPressed: authController.isLoading.value
+                                ? null
+                                : () {
+                                    FocusScope.of(context).unfocus();
+                                    if (_formKey.currentState!.validate()) {
+                                      print("AQUI");
+                                      authController.signIn(
+                                          email: emailController.text,
+                                          password: passwordController.text);
+                                    }
+                                  },
+                            child: authController.isLoading.value
+                                ? const CircularProgressIndicator()
+                                : const Text(
+                                    'Entrar',
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
+                                  ),
+                          );
                         },
-                        child: const Text(
-                          'Entrar',
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
                       ),
                     ),
                     Align(
