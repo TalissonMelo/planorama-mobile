@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/sign_in_screen.dart';
+import 'package:liberbox_mobile/src/auth/view/sign_in_screen.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
