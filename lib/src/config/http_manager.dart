@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class HttpManager {
-  Future restRequest({
+  Future<Map> restRequest({
     required String url,
     required String methodHttp,
     Map? headers,
@@ -29,7 +29,7 @@ class HttpManager {
 
       return response.data;
     } on DioError catch (error) {
-      error.response?.data ?? {};
+      return error.response?.data ?? {};
     } catch (error) {
       return {};
     }

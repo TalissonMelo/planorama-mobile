@@ -76,7 +76,6 @@ class SignInScreen extends StatelessWidget {
                                 : () {
                                     FocusScope.of(context).unfocus();
                                     if (_formKey.currentState!.validate()) {
-                                      print("AQUI");
                                       authController.signIn(
                                           email: emailController.text,
                                           password: passwordController.text);
