@@ -6,15 +6,11 @@ import 'package:liberbox_mobile/src/config/http_manager.dart';
 class AuthRepository {
   final HttpManager _httpManager = HttpManager();
 
-  Future signIn(Login login) async {
-    final result = await _httpManager.restRequest(
+  Future<Map> signIn(Login login) async {
+    return await _httpManager.restRequest(
       url: Endpoints.signin,
       methodHttp: HttpMethods.post,
       body: login.toJson(),
     );
-
-    print("REPOSITORY");
-    print(result);
-    print("----------------------------");
   }
 }

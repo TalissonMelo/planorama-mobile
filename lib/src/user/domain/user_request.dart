@@ -10,4 +10,13 @@ class UserRequest {
     required this.phone,
     required this.password,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'nickname': nickname,
+      'phone': phone,
+      'password': password
+    };
+  }
 }

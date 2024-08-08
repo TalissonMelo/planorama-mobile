@@ -29,7 +29,8 @@ class HttpManager {
 
       return response.data;
     } on DioError catch (error) {
-      return error.response?.data ?? {};
+      print(error.message);
+      return {};
     } catch (error) {
       return {};
     }
