@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:liberbox_mobile/src/components/custom_api_advice.dart';
 
 class HttpManager {
-  Future<Map> restRequest({
+  Future<CustomApiAdvice> restRequest({
     required String url,
     required String methodHttp,
     Map? headers,
@@ -11,8 +12,6 @@ class HttpManager {
       ..addAll({
         'content-type': 'application/json',
         'accept': 'application/json',
-        'Authorization': 'g1Oui3JqxnY4S1ykpQWHwEKGOe0dRYCPvPF4iykc',
-        'X-UserID': 'rFBKU8tk0m5ZlKES2CGieOaoYz6TgKxVMv8jRIsN',
       });
 
     Dio dio = Dio();
@@ -27,12 +26,11 @@ class HttpManager {
         data: body,
       );
 
-      return response.data;
+      return CustomApiAdvice(success: true, data: response.data);
     } on DioError catch (error) {
-      print(error.message);
-      return {};
+      return CustomApiAdvice(success: false, errorMessage: error.message);
     } catch (error) {
-      return {};
+      return CustomApiAdvice(success: false, errorMessage: error.toString());
     }
   }
 }

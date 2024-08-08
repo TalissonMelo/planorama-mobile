@@ -1,17 +1,16 @@
-import 'package:liberbox_mobile/src/auth/model/login.dart';
 import 'package:liberbox_mobile/src/components/custom_api_advice.dart';
 import 'package:liberbox_mobile/src/config/constants/endpoints.dart';
 import 'package:liberbox_mobile/src/config/entity/http_methods.dart';
 import 'package:liberbox_mobile/src/config/http_manager.dart';
 
-class AuthRepository {
+class ValidateTokenRepository {
   final HttpManager _httpManager = HttpManager();
 
-  Future<CustomApiAdvice> signIn(Login login) async {
+  Future<CustomApiAdvice> validateToken(String token) async {
     return await _httpManager.restRequest(
-      url: Endpoints.signin,
+      url: Endpoints.validToken,
       methodHttp: HttpMethods.post,
-      body: login.toJson(),
+      headers: {'Authorization': token},
     );
   }
 }

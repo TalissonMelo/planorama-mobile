@@ -10,10 +10,10 @@ class AuthService {
     final result = await authRepository.signIn(login);
 
     try {
-      UserLogin userLogin = UserLogin.fromMap(result);
+      UserLogin userLogin = UserLogin.fromMap(result.data);
       return AuthResult.success(userLogin);
     } catch (error) {
-      return AuthResult.error('login ou senha incorretas, tente novamente!');
+      return AuthResult.error(result.errorMessage ?? '');
     }
   }
 }
