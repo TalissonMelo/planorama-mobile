@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
-class Splash extends StatefulWidget {
+class Splash extends StatelessWidget {
   const Splash({super.key});
-
-  @override
-  State<Splash> createState() => _SplashState();
-}
-
-class _SplashState extends State<Splash> {
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      Get.offNamed(PagesRoutes.loginInRoute);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

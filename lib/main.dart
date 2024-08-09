@@ -5,6 +5,7 @@ import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/pages_routes/pages.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(AuthController());
   runApp(const MyApp());
 }
