@@ -40,8 +40,8 @@ class AuthController extends GetxController {
   }) async {
     isLoading.value = true;
 
-    AuthResult result =
-        await authService.execute(Login(email: email, password: password));
+    AuthResult result = await authService.execute(
+        Login(email: email, password: utilService.encodePassword(password)));
 
     result.when(success: (user) {
       saveUserStorage();

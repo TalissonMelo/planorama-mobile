@@ -27,11 +27,11 @@ class ValidateTokenService {
   Future<void> validToken() async {
     UserLogin? user = await utilService.getLocalUser(key: StorageKeys.user);
 
-    if (user == null) {
+    if (user?.authorization == null) {
       Get.offAllNamed(PagesRoutes.loginInRoute);
       return;
     }
 
-    await execute(user.authorization!);
+    await execute(user!.authorization!);
   }
 }
