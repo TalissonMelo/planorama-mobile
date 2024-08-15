@@ -6,7 +6,7 @@ import 'package:liberbox_mobile/src/recoverPassword/check_phone_code.dart';
 import 'package:liberbox_mobile/src/recoverPassword/recover_password.dart';
 import 'package:liberbox_mobile/src/recoverPassword/send_phone_code.dart';
 import 'package:liberbox_mobile/src/splash/splash.dart';
-import 'package:liberbox_mobile/src/user/sign_up_screen.dart';
+import 'package:liberbox_mobile/src/user/view/sign_up_screen.dart';
 
 abstract class Pages {
   static final pages = <GetPage>[

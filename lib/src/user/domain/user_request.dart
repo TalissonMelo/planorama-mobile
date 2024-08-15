@@ -1,17 +1,17 @@
 class UserRequest {
-  String email;
-  String nickname;
-  String phone;
-  String password;
+  String? email;
+  String? nickname;
+  String? phone;
+  String? password;
 
   UserRequest({
-    required this.email,
-    required this.nickname,
-    required this.phone,
-    required this.password,
+    this.email,
+    this.nickname,
+    this.phone,
+    this.password,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'email': email,
       'nickname': nickname,

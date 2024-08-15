@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
+import 'package:liberbox_mobile/src/util/validator_email.dart';
+import 'package:liberbox_mobile/src/util/validator_password.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -39,26 +41,14 @@ class SignInScreen extends StatelessWidget {
                       controller: emailController,
                       icon: Icons.email,
                       label: 'Email',
-                      validator: (email) {
-                        if (email == null || email.isEmpty)
-                          return 'Digite seu melhor email!';
-
-                        if (!email.isEmail) return 'Digite um email válido!';
-
-                        return null;
-                      },
+                      validator: emailValidator,
                     ),
                     CustomTextField(
                       controller: passwordController,
                       icon: Icons.lock,
                       label: 'Senha',
                       isSecret: true,
-                      validator: (password) {
-                        if (password == null || password.isEmpty)
-                          return 'Digite sua senha.';
-
-                        return null;
-                      },
+                      validator: passwordValidator,
                     ),
                     SizedBox(
                       height: 50,

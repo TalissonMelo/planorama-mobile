@@ -10,4 +10,12 @@ class User {
     required this.nickname,
     required this.phone,
   });
+
+  static User fromMap(Map map) {
+    return User(
+        id: map['id'],
+        email: map['email'],
+        nickname: map['nickname'],
+        phone: map['phone']);
+  }
 }
