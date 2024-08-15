@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/user/controller/sign_up_controller.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../util/validator_email.dart';
@@ -16,6 +17,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formGlobalKey = GlobalKey<FormState>();
+  final signUpController = SignUpController();
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
 
   final phoneFormatter = MaskTextInputFormatter(
     mask: '## # ####-####',
@@ -55,32 +63,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       key: _formGlobalKey,
                       child: Column(
                         children: [
-                          const CustomTextField(
+                          CustomTextField(
                               icon: Icons.email,
                               label: 'Email',
                               validator: emailValidator,
+                              controller: emailController,
                               keyboardType: TextInputType.emailAddress),
-                          const CustomTextField(
+                          CustomTextField(
                               icon: Icons.person,
                               label: 'Nome',
                               validator: nameValidator,
+                              controller: nameController,
                               keyboardType: TextInputType.text),
                           CustomTextField(
                               icon: Icons.phone,
                               label: 'Telefone',
                               inputFormatters: [phoneFormatter],
                               validator: phoneValidator,
+                              controller: phoneController,
                               keyboardType: TextInputType.phone),
-                          const CustomTextField(
+                          CustomTextField(
                             icon: Icons.lock,
                             label: 'Senha',
                             isSecret: true,
+                            controller: passwordController,
                             validator: passwordValidator,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             icon: Icons.lock,
                             label: 'Confirme Senha',
                             isSecret: true,
+                            controller: passwordConfirmController,
                             validator: passwordValidator,
                           ),
                           SizedBox(
@@ -92,12 +105,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(18))),
-                                onPressed: () {
-                                  _formGlobalKey.currentState?.validate();
-                                },
-                                child: const Text('Cadastrar usuário',
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white))),
+                                onPressed: signUpController.isLoading.value
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context).unfocus();
+                                        if (_formGlobalKey.currentState!
+                                            .validate()) {
+                                          signUpController.signUp(
+                                              nickname: nameController.text,
+                                              phone: phoneController.text,
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                              passwordConfirm:
+                                                  passwordConfirmController
+                                                      .text);
+                                        }
+                                      },
+                                child: signUpController.isLoading.value
+                                    ? const CircularProgressIndicator()
+                                    : const Text('Cadastrar usuário',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white))),
                           )
                         ],
                       ),
