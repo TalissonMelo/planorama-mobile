@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
+import 'package:liberbox_mobile/src/recoverPassword/controller/check_phone_code_controller.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CheckPhoneCode extends StatefulWidget {
   final String phoneNumber;
@@ -15,6 +15,17 @@ class CheckPhoneCode extends StatefulWidget {
 
 class _CheckPhoneCodeState extends State<CheckPhoneCode> {
   late String phoneNumber;
+
+  final checkCodeFormKey = GlobalKey<FormState>();
+  final checkPhoneCodeController = CheckPhoneCodeController();
+  final codeController = TextEditingController();
+
+  final customFormatterCode = MaskTextInputFormatter(
+    mask: 'AAAAA',
+    filter: {
+      'A': RegExp(r'[A-Z0-9]'),
+    },
+  );
 
   @override
   void initState() {
@@ -78,33 +89,51 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                         top: Radius.circular(45),
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        const CustomTextField(
-                            icon: Icons.lock, label: 'Código'),
-                        SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18)),
-                            ),
-                            onPressed: () {
-                              Get.offNamed(PagesRoutes.recoverPasswordRoute);
-                            },
-                            child: const Text(
-                              'Confirmar',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                    child: Form(
+                      key: checkCodeFormKey,
+                      child: Column(
+                        children: [
+                          CustomTextField(
+                              icon: Icons.lock,
+                              label: 'Código',
+                              controller: codeController,
+                              inputFormatters: [customFormatterCode],
+                              keyboardType: TextInputType.emailAddress),
+                          SizedBox(
+                            height: 50,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)),
                               ),
+                              onPressed:
+                                  checkPhoneCodeController.isLoading.value
+                                      ? null
+                                      : () {
+                                          FocusScope.of(context).unfocus();
+                                          if (checkCodeFormKey.currentState!
+                                              .validate()) {
+                                            checkPhoneCodeController.validCode(
+                                              code: codeController.text,
+                                            );
+                                          }
+                                        },
+                              child: checkPhoneCodeController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : const Text(
+                                      'Confirmar',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                             ),
                           ),
-                        ),
-                        const CustomReturnedLogin(),
-                      ],
+                          const CustomReturnedLogin(),
+                        ],
+                      ),
                     ),
                   ),
                 ],

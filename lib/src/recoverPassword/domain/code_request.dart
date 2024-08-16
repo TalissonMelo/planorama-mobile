@@ -4,4 +4,10 @@ class CodeRequest {
   CodeRequest({
     required this.code,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code,
+    };
+  }
 }

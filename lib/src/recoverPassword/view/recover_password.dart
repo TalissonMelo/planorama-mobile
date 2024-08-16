@@ -4,9 +4,16 @@ import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
-class RecoverPassword extends StatelessWidget {
-  const RecoverPassword({super.key});
+class RecoverPassword extends StatefulWidget {
+  final String code;
 
+  const RecoverPassword({super.key, required this.code});
+
+  @override
+  State<RecoverPassword> createState() => _RecoverPasswordState();
+}
+
+class _RecoverPasswordState extends State<RecoverPassword> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

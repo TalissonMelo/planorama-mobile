@@ -38,7 +38,9 @@ abstract class Pages {
     ),
     GetPage(
       name: PagesRoutes.recoverPasswordRoute,
-      page: () => const RecoverPassword(),
+      page: () => RecoverPassword(
+        code: Get.parameters['code'] ?? '',
+      ),
     )
   ];
 }
