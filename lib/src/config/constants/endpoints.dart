@@ -4,4 +4,5 @@ abstract class Endpoints {
   static const String signin = '$baseUrl/login';
   static const String signup = '$baseUrl/v1/users';
   static const String validToken = '$baseUrl/validateToken';
+  static const String sendPhoneCode = '$baseUrl/v1/users/passwords';
 }

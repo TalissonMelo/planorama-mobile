@@ -4,4 +4,8 @@ class PhoneNumber {
   PhoneNumber({
     required this.phone,
   });
+
+  static PhoneNumber fromMap(Map map) {
+    return PhoneNumber(phone: map['phone']);
+  }
 }

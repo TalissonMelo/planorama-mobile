@@ -4,8 +4,23 @@ import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 
-class CheckPhoneCode extends StatelessWidget {
-  const CheckPhoneCode({super.key});
+class CheckPhoneCode extends StatefulWidget {
+  final String phoneNumber;
+
+  const CheckPhoneCode({super.key, required this.phoneNumber});
+
+  @override
+  State<CheckPhoneCode> createState() => _CheckPhoneCodeState();
+}
+
+class _CheckPhoneCodeState extends State<CheckPhoneCode> {
+  late String phoneNumber;
+
+  @override
+  void initState() {
+    super.initState();
+    phoneNumber = widget.phoneNumber;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +50,18 @@ class CheckPhoneCode extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Align(
                       alignment: Alignment.center,
                       child: Center(
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Text(
-                            'Insira o código que foi enviado para o número (34) 9 923*****',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            'Insira o código que foi enviado para o número $phoneNumber',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
@@ -51,11 +69,15 @@ class CheckPhoneCode extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 40),
+                      horizontal: 32,
+                      vertical: 40,
+                    ),
                     decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(45))),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(45),
+                      ),
+                    ),
                     child: Column(
                       children: [
                         const CustomTextField(
@@ -65,16 +87,19 @@ class CheckPhoneCode extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18)),
+                            ),
                             onPressed: () {
                               Get.offNamed(PagesRoutes.recoverPasswordRoute);
                             },
                             child: const Text(
                               'Confirmar',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
