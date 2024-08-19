@@ -6,4 +6,5 @@ abstract class Endpoints {
   static const String validToken = '$baseUrl/validateToken';
   static const String sendPhoneCode = '$baseUrl/v1/users/passwords';
   static const String checkPhoneCode = '$baseUrl/v1/users/passwords/codes';
+  static const String recoverPasswordCode = '$baseUrl/v1/users/passwords/codes';
 }

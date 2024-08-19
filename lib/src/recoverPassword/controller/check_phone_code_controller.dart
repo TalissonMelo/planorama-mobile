@@ -24,7 +24,7 @@ class CheckPhoneCodeController extends GetxController {
 
     result.when(success: (code) {
       Get.offAllNamed(PagesRoutes.recoverPasswordRoute,
-          parameters: {'code': code.newCode});
+          parameters: {'code': code.newCode, 'email': code.email});
     }, error: (message) {
       toast.showToast(message: message, isError: true);
     });

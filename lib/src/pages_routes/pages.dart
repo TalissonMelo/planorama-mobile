@@ -40,6 +40,7 @@ abstract class Pages {
       name: PagesRoutes.recoverPasswordRoute,
       page: () => RecoverPassword(
         code: Get.parameters['code'] ?? '',
+        email: Get.parameters['email'] ?? '',
       ),
     )
   ];

@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
+import 'package:liberbox_mobile/src/recoverPassword/controller/recover_password_controller.dart';
+
+import '../../util/validator_password.dart';
 
 class RecoverPassword extends StatefulWidget {
   final String code;
+  final String email;
 
-  const RecoverPassword({super.key, required this.code});
+  const RecoverPassword({super.key, required this.code, required this.email});
 
   @override
   State<RecoverPassword> createState() => _RecoverPasswordState();
 }
 
 class _RecoverPasswordState extends State<RecoverPassword> {
+  final formRecoverPassword = GlobalKey<FormState>();
+  final recoverPasswordController = RecoverPasswordController();
+
+  final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -49,35 +57,61 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                         color: Colors.white,
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(45))),
-                    child: Column(
-                      children: [
-                        const CustomTextField(
-                          icon: Icons.lock,
-                          label: 'Senha',
-                          isSecret: true,
-                        ),
-                        const CustomTextField(
-                          icon: Icons.lock,
-                          label: 'Confirme Senha',
-                          isSecret: true,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
-                              onPressed: () {
-                                Get.offNamed(PagesRoutes.loginInRoute);
-                              },
-                              child: const Text('Redefinir a senha',
-                                  style: TextStyle(
-                                      fontSize: 18, color: Colors.white))),
-                        ),
-                        const CustomReturnedLogin(),
-                      ],
+                    child: Form(
+                      key: formRecoverPassword,
+                      child: Column(
+                        children: [
+                          CustomTextField(
+                            icon: Icons.lock,
+                            label: 'Senha',
+                            isSecret: true,
+                            controller: passwordController,
+                            validator: passwordValidator,
+                          ),
+                          CustomTextField(
+                            icon: Icons.lock,
+                            label: 'Confirme Senha',
+                            isSecret: true,
+                            controller: passwordConfirmController,
+                            validator: passwordValidator,
+                          ),
+                          SizedBox(
+                            height: 50,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18))),
+                                onPressed: recoverPasswordController
+                                        .isLoading.value
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context).unfocus();
+                                        if (formRecoverPassword.currentState!
+                                            .validate()) {
+                                          recoverPasswordController
+                                              .changePassword(
+                                                  code: widget.code,
+                                                  email: widget.email,
+                                                  password:
+                                                      passwordController.text,
+                                                  passwordConfirm:
+                                                      passwordConfirmController
+                                                          .text);
+                                        }
+                                      },
+                                child: recoverPasswordController.isLoading.value
+                                    ? const CircularProgressIndicator()
+                                    : const Text('Redefinir a senha',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white))),
+                          ),
+                          const CustomReturnedLogin(),
+                        ],
+                      ),
                     ),
                   ),
                 ],

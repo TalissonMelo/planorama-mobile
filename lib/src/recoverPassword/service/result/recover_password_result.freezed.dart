@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'check_phone_code_result.dart';
+part of 'recover_password_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$CheckPhoneCodeResult {
+mixin _$RecoverPasswordResult {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(CodeResponse code) success,
@@ -57,24 +57,24 @@ mixin _$CheckPhoneCodeResult {
 }
 
 /// @nodoc
-abstract class $CheckPhoneCodeResultCopyWith<$Res> {
-  factory $CheckPhoneCodeResultCopyWith(CheckPhoneCodeResult value,
-          $Res Function(CheckPhoneCodeResult) then) =
-      _$CheckPhoneCodeResultCopyWithImpl<$Res, CheckPhoneCodeResult>;
+abstract class $RecoverPasswordResultCopyWith<$Res> {
+  factory $RecoverPasswordResultCopyWith(RecoverPasswordResult value,
+          $Res Function(RecoverPasswordResult) then) =
+      _$RecoverPasswordResultCopyWithImpl<$Res, RecoverPasswordResult>;
 }
 
 /// @nodoc
-class _$CheckPhoneCodeResultCopyWithImpl<$Res,
-        $Val extends CheckPhoneCodeResult>
-    implements $CheckPhoneCodeResultCopyWith<$Res> {
-  _$CheckPhoneCodeResultCopyWithImpl(this._value, this._then);
+class _$RecoverPasswordResultCopyWithImpl<$Res,
+        $Val extends RecoverPasswordResult>
+    implements $RecoverPasswordResultCopyWith<$Res> {
+  _$RecoverPasswordResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -89,21 +89,21 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$CheckPhoneCodeResultCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$RecoverPasswordResultCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
+    Object? code = freezed,
   }) {
     return _then(_$SuccessImpl(
-      null == code
+      freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as CodeResponse,
@@ -121,7 +121,7 @@ class _$SuccessImpl implements Success {
 
   @override
   String toString() {
-    return 'CheckPhoneCodeResult.success(code: $code)';
+    return 'RecoverPasswordResult.success(code: $code)';
   }
 
   @override
@@ -129,13 +129,14 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.code, code) || other.code == code));
+            const DeepCollectionEquality().equals(other.code, code));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, code);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(code));
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -206,12 +207,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements CheckPhoneCodeResult {
+abstract class Success implements RecoverPasswordResult {
   factory Success(final CodeResponse code) = _$SuccessImpl;
 
   CodeResponse get code;
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -229,13 +230,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$CheckPhoneCodeResultCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$RecoverPasswordResultCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -261,7 +262,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'CheckPhoneCodeResult.error(message: $message)';
+    return 'RecoverPasswordResult.error(message: $message)';
   }
 
   @override
@@ -275,7 +276,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -346,12 +347,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements CheckPhoneCodeResult {
+abstract class Error implements RecoverPasswordResult {
   factory Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of CheckPhoneCodeResult
+  /// Create a copy of RecoverPasswordResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
