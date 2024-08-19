@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'recover_password_result.dart';
+part of 'user_profile_result.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,22 +15,22 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RecoverPasswordResult {
+mixin _$UserProfileResult {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CodeResponse code) success,
+    required TResult Function(UserResponse user) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CodeResponse code)? success,
+    TResult? Function(UserResponse user)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CodeResponse code)? success,
+    TResult Function(UserResponse user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -57,24 +57,23 @@ mixin _$RecoverPasswordResult {
 }
 
 /// @nodoc
-abstract class $RecoverPasswordResultCopyWith<$Res> {
-  factory $RecoverPasswordResultCopyWith(RecoverPasswordResult value,
-          $Res Function(RecoverPasswordResult) then) =
-      _$RecoverPasswordResultCopyWithImpl<$Res, RecoverPasswordResult>;
+abstract class $UserProfileResultCopyWith<$Res> {
+  factory $UserProfileResultCopyWith(
+          UserProfileResult value, $Res Function(UserProfileResult) then) =
+      _$UserProfileResultCopyWithImpl<$Res, UserProfileResult>;
 }
 
 /// @nodoc
-class _$RecoverPasswordResultCopyWithImpl<$Res,
-        $Val extends RecoverPasswordResult>
-    implements $RecoverPasswordResultCopyWith<$Res> {
-  _$RecoverPasswordResultCopyWithImpl(this._value, this._then);
+class _$UserProfileResultCopyWithImpl<$Res, $Val extends UserProfileResult>
+    implements $UserProfileResultCopyWith<$Res> {
+  _$UserProfileResultCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -84,29 +83,29 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CodeResponse code});
+  $Res call({UserResponse user});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$RecoverPasswordResultCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$UserProfileResultCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = null,
+    Object? user = null,
   }) {
     return _then(_$SuccessImpl(
-      null == code
-          ? _value.code
-          : code // ignore: cast_nullable_to_non_nullable
-              as CodeResponse,
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserResponse,
     ));
   }
 }
@@ -114,14 +113,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  _$SuccessImpl(this.code);
+  _$SuccessImpl(this.user);
 
   @override
-  final CodeResponse code;
+  final UserResponse user;
 
   @override
   String toString() {
-    return 'RecoverPasswordResult.success(code: $code)';
+    return 'UserProfileResult.success(user: $user)';
   }
 
   @override
@@ -129,13 +128,13 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.code, code) || other.code == code));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, code);
+  int get hashCode => Object.hash(runtimeType, user);
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -146,30 +145,30 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CodeResponse code) success,
+    required TResult Function(UserResponse user) success,
     required TResult Function(String message) error,
   }) {
-    return success(code);
+    return success(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CodeResponse code)? success,
+    TResult? Function(UserResponse user)? success,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(code);
+    return success?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CodeResponse code)? success,
+    TResult Function(UserResponse user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(code);
+      return success(user);
     }
     return orElse();
   }
@@ -206,12 +205,12 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements RecoverPasswordResult {
-  factory Success(final CodeResponse code) = _$SuccessImpl;
+abstract class Success implements UserProfileResult {
+  factory Success(final UserResponse user) = _$SuccessImpl;
 
-  CodeResponse get code;
+  UserResponse get user;
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -229,13 +228,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$RecoverPasswordResultCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$UserProfileResultCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -261,7 +260,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'RecoverPasswordResult.error(message: $message)';
+    return 'UserProfileResult.error(message: $message)';
   }
 
   @override
@@ -275,7 +274,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -286,7 +285,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CodeResponse code) success,
+    required TResult Function(UserResponse user) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -295,7 +294,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CodeResponse code)? success,
+    TResult? Function(UserResponse user)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -304,7 +303,7 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CodeResponse code)? success,
+    TResult Function(UserResponse user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -346,12 +345,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements RecoverPasswordResult {
+abstract class Error implements UserProfileResult {
   factory Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of RecoverPasswordResult
+  /// Create a copy of UserProfileResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

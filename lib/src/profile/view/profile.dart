@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/auth/view/sign_in_screen.dart';
+import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -11,6 +12,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final authController = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     final phoneFormatter = MaskTextInputFormatter(
@@ -25,11 +28,7 @@ class _ProfileState extends State<Profile> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (c) {
-                  return SignInScreen();
-                }),
-              );
+              authController.signOut();
             },
             icon: const Icon(Icons.logout),
             color: Colors.white,
@@ -40,15 +39,21 @@ class _ProfileState extends State<Profile> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: [
-          const CustomTextField(
+          CustomTextField(
             icon: Icons.email,
             label: "Email",
+            initialValue: authController.user.email,
             readOnly: true,
           ),
-          const CustomTextField(icon: Icons.person, label: "Nome"),
+          CustomTextField(
+            icon: Icons.person,
+            label: "Nome",
+            initialValue: authController.user.nickname,
+          ),
           CustomTextField(
             icon: Icons.phone,
             label: "Telefone",
+            initialValue: authController.user.phone,
             inputFormatters: [phoneFormatter],
           ),
           SizedBox(

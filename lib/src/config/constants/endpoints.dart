@@ -7,4 +7,12 @@ abstract class Endpoints {
   static const String sendPhoneCode = '$baseUrl/v1/users/passwords';
   static const String checkPhoneCode = '$baseUrl/v1/users/passwords/codes';
   static const String recoverPasswordCode = '$baseUrl/v1/users/passwords/codes';
+
+  static String changeUserPassword(String userId) {
+    return '$baseUrl/v1/users/$userId/passwords';
+  }
+
+  static String changeUserProfile(String userId) {
+    return '$baseUrl/v1/users/$userId';
+  }
 }

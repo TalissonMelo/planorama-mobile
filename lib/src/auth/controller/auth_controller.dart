@@ -44,11 +44,20 @@ class AuthController extends GetxController {
         Login(email: email, password: utilService.encodePassword(password)));
 
     result.when(success: (user) {
+      this.user = user;
       saveUserStorage();
     }, error: (message) {
       toast.showToast(message: message, isError: true);
     });
 
     isLoading.value = false;
+  }
+
+  Future<void> signOut() async {
+    user = UserLogin();
+
+    await utilService.removeLocalData(key: StorageKeys.user);
+
+    Get.offAllNamed(PagesRoutes.loginInRoute);
   }
 }
