@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/profile/controller/user_password_controller.dart';
+import 'package:liberbox_mobile/src/profile/controller/user_profile_controller.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../../util/validator_name.dart';
 import '../../util/validator_password.dart';
+import '../../util/validator_phone.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -17,11 +20,23 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final authController = Get.find<AuthController>();
   final userPasswordController = UserPasswordController();
+  final userProfileController = UserProfileController();
 
   final formPassword = GlobalKey<FormState>();
   final newPasswordController = TextEditingController();
   final oldPasswordController = TextEditingController();
   final passwordConfirmController = TextEditingController();
+
+  final formProfile = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = authController.user.nickname ?? '';
+    phoneController.text = authController.user.phone ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,22 +63,32 @@ class _ProfileState extends State<Profile> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: [
-          CustomTextField(
-            icon: Icons.email,
-            label: "Email",
-            initialValue: authController.user.email,
-            readOnly: true,
-          ),
-          CustomTextField(
-            icon: Icons.person,
-            label: "Nome",
-            initialValue: authController.user.nickname,
-          ),
-          CustomTextField(
-            icon: Icons.phone,
-            label: "Telefone",
-            initialValue: authController.user.phone,
-            inputFormatters: [phoneFormatter],
+          Form(
+            key: formProfile,
+            child: Column(
+              children: [
+                CustomTextField(
+                  icon: Icons.email,
+                  label: "Email",
+                  initialValue: authController.user.email,
+                  readOnly: true,
+                ),
+                CustomTextField(
+                  icon: Icons.person,
+                  label: "Nome",
+                  validator: nameValidator,
+                  controller: nameController,
+                  keyboardType: TextInputType.text,
+                ),
+                CustomTextField(
+                    icon: Icons.phone,
+                    label: "Telefone",
+                    inputFormatters: [phoneFormatter],
+                    validator: phoneValidator,
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone),
+              ],
+            ),
           ),
           SizedBox(
             height: 50,
@@ -74,10 +99,22 @@ class _ProfileState extends State<Profile> {
                     color: Colors.blue,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: userProfileController.isLoading.value
+                    ? null
+                    : () {
+                        FocusScope.of(context).unfocus();
+                        if (formProfile.currentState!.validate()) {
+                          userProfileController.changeProfile(
+                              nickname: nameController.text,
+                              phone: phoneController.text);
+                        }
+                      },
                 child: const Text(
                   'Atualizar Perfil',
-                  style: TextStyle(color: Colors.blue, fontSize: 18),
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18,
+                  ),
                 )),
           ),
           const Padding(padding: EdgeInsets.only(bottom: 10)),
