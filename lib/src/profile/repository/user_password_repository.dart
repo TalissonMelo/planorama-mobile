@@ -10,11 +10,15 @@ class UserPasswordRepository {
   Future<CustomApiAdvice> execute(
     String userId,
     UserPasswordChange password,
+    String token,
   ) async {
     return await _httpManager.restRequest(
-      url: Endpoints.changeUserPassword(userId),
-      methodHttp: HttpMethods.put,
-      body: password.toJson(),
-    );
+        url: Endpoints.changeUserPassword(userId),
+        methodHttp: HttpMethods.put,
+        body: password.toJson(),
+        headers: {
+          'Authorization': token,
+          'X-UserID': userId,
+        });
   }
 }

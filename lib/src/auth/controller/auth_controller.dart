@@ -47,7 +47,7 @@ class AuthController extends GetxController {
       this.user = user;
       saveUserStorage();
     }, error: (message) {
-      toast.showToast(message: message, isError: true);
+      toast.showToast(message: 'E-mail ou senha, incorretos.', isError: true);
     });
 
     isLoading.value = false;

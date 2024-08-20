@@ -23,7 +23,6 @@ class UserPasswordController extends GetxController {
       isLoading.value = true;
 
       UserPasswordResult result = await userPasswordService.execute(
-        '',
         UserPasswordChange(
           newPassword: utilService.encodePassword(newPassword),
           oldPassword: utilService.encodePassword(oldPassword),
