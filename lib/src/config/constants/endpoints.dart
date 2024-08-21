@@ -10,7 +10,7 @@ abstract class Endpoints {
   static const String recoverPasswordCode = '$baseUrl/v1/users/passwords/codes';
 
   static String changeUserPassword(String userId) {
-    return '$baseUrl/v1/users/$userId/password';
+    return '$baseUrl/v1/users/$userId/passwords';
   }
 
   static String changeUserProfile(String userId) {
@@ -18,6 +18,6 @@ abstract class Endpoints {
   }
 
   static String listLegend(String userId) {
-    return '$baseUrl/v1/user/$userId/legend';
+    return '$baseUrl/v1/users/$userId/legends';
   }
 }

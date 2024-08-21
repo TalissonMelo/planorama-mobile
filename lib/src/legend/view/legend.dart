@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/legend/controller/create_legend_controller.dart';
 import 'package:liberbox_mobile/src/legend/controller/list_legend_controller.dart';
 import 'package:liberbox_mobile/src/legend/model/legend_response.dart';
+
+import '../../util/validator_description.dart';
 
 class Legend extends StatefulWidget {
   const Legend({super.key});
@@ -12,7 +15,12 @@ class Legend extends StatefulWidget {
 }
 
 class _LegendState extends State<Legend> {
-  final ListLegendController listLegendController = ListLegendController();
+  final listLegendController = ListLegendController();
+  final createLegendController = CreateLegendController();
+  final formLegend = GlobalKey<FormState>();
+  final descriptionController = TextEditingController();
+  final colorController = TextEditingController();
+
   List<LegendResponse> legends = [];
 
   @override
@@ -53,10 +61,17 @@ class _LegendState extends State<Legend> {
           final legend = legends[index];
           return Card(
             child: ListTile(
-              leading: Icon(Icons.label, color: legend.colorValue, size: 50),
+              leading: Icon(
+                Icons.label,
+                color: legend.colorValue,
+                size: 50,
+              ),
               title: Text(
                 legend.description,
-                style: const TextStyle(color: Colors.black, fontSize: 18),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
               ),
             ),
           );
@@ -70,74 +85,89 @@ class _LegendState extends State<Legend> {
       context: context,
       builder: (context) {
         Color selectedColor = Colors.blue;
-
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    'Cadastrar legenda',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const CustomTextField(
-                  icon: Icons.description,
-                  label: 'Descrição',
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Selecione uma cor',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(
-                        height: 100,
-                        child: BlockPicker(
-                          pickerColor: selectedColor,
-                          onColorChanged: (color) {
-                            selectedColor = color;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text(
-                      'Cadastrar',
+            child: Form(
+              key: formLegend,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      'Cadastrar legenda',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  CustomTextField(
+                    icon: Icons.description,
+                    label: 'Descrição',
+                    validator: descriptionValidator,
+                    controller: descriptionController,
+                    keyboardType: TextInputType.text,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Selecione uma cor',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 100,
+                          child: BlockPicker(
+                            pickerColor: selectedColor,
+                            onColorChanged: (color) {
+                              selectedColor = color;
+                              colorController.text =
+                                  '#${color.value.toRadixString(16).padLeft(8, '0').substring(2)}';
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: createLegendController.isLoading.value
+                          ? null
+                          : () {
+                              FocusScope.of(context).unfocus();
+                              if (formLegend.currentState!.validate()) {
+                                createLegendController.created(
+                                    description: descriptionController.text,
+                                    color: colorController.text);
+                                Navigator.pop(context);
+                              }
+                            },
+                      child: const Text(
+                        'Cadastrar',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
