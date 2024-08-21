@@ -9,20 +9,21 @@ class AvailableTime extends StatefulWidget {
 }
 
 class _AvailableTimeState extends State<AvailableTime> {
-  String _selectedDuration = '30 minutos';
+  int _selectedDuration = 30;
 
-  final List<Map<String, dynamic>> schedules = [
-    {
-      'name': 'Escola Isolina 2º I ',
-      'start': DateTime.now(),
-      'end': DateTime.now().add(const Duration(hours: 1)),
-    },
-    {
-      'name': 'Escola Raul Soares 3º I ',
-      'start': DateTime.now(),
-      'end': DateTime.now().add(const Duration(hours: 1)),
-    },
+  final List<Map<String, dynamic>> _selectedDurations = [
+    {'value': 30, 'label': '30 minutos'},
+    {'value': 60, 'label': '1 hora'},
+    {'value': 90, 'label': '1h 30m'},
+    {'value': 120, 'label': '2 horas'},
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final List<Map<String, dynamic>> schedules = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class _AvailableTimeState extends State<AvailableTime> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: DropdownButtonFormField<String>(
+            child: DropdownButtonFormField<int>(
               decoration: InputDecoration(
-                labelText: 'Período disponível ',
+                labelText: 'Período disponível',
                 labelStyle: const TextStyle(fontSize: 18.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -42,18 +43,13 @@ class _AvailableTimeState extends State<AvailableTime> {
                 fillColor: Colors.grey[100],
               ),
               value: _selectedDuration,
-              items: <String>[
-                '30 minutos',
-                '1 hora',
-                '1 hora e 30 minutos',
-                '2 horas'
-              ].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+              items: _selectedDurations.map((Map<String, dynamic> duration) {
+                return DropdownMenuItem<int>(
+                  value: duration['value'],
+                  child: Text(duration['label']),
                 );
               }).toList(),
-              onChanged: (String? newValue) {
+              onChanged: (int? newValue) {
                 setState(() {
                   _selectedDuration = newValue!;
                 });

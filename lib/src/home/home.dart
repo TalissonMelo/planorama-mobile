@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/home/available_time.dart';
-import 'package:liberbox_mobile/src/home/registered_appointments.dart';
+import 'package:liberbox_mobile/src/home/view/available_time.dart';
+import 'package:liberbox_mobile/src/home/view/registered_appointments.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
