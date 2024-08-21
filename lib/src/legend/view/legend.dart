@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
+import 'package:liberbox_mobile/src/legend/controller/list_legend_controller.dart';
+import 'package:liberbox_mobile/src/legend/model/legend_response.dart';
 
 class Legend extends StatefulWidget {
   const Legend({super.key});
@@ -10,6 +12,22 @@ class Legend extends StatefulWidget {
 }
 
 class _LegendState extends State<Legend> {
+  final ListLegendController listLegendController = ListLegendController();
+  List<LegendResponse> legends = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchLegends();
+  }
+
+  void fetchLegends() async {
+    List<LegendResponse> fetchedLegends = await listLegendController.list();
+    setState(() {
+      legends = fetchedLegends;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,19 +45,22 @@ class _LegendState extends State<Legend> {
           ),
         ],
       ),
-      body: ListView(
+      body: ListView.builder(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(0, 20, 5, 0),
-        children: const [
-          Card(
+        itemCount: legends.length,
+        itemBuilder: (context, index) {
+          final legend = legends[index];
+          return Card(
             child: ListTile(
-                leading: Icon(Icons.label, color: Color(0xFF000000), size: 50),
-                title: Text(
-                  'Inglês',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                )),
-          ),
-        ],
+              leading: Icon(Icons.label, color: legend.colorValue, size: 50),
+              title: Text(
+                legend.description,
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

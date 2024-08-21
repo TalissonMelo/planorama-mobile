@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/home/home.dart';
-import 'package:liberbox_mobile/src/legend/legend.dart';
+import 'package:liberbox_mobile/src/legend/view/legend.dart';
 import 'package:liberbox_mobile/src/profile/view/profile.dart';
 import 'package:liberbox_mobile/src/schedule/schedule.dart';
 import 'package:liberbox_mobile/src/sessions/session.dart';

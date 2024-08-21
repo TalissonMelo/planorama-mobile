@@ -3,6 +3,7 @@ const String baseUrl = "http://10.0.2.2:8080";
 abstract class Endpoints {
   static const String signin = '$baseUrl/login';
   static const String signup = '$baseUrl/v1/users';
+  static const String createLegend = '$baseUrl/v1/legends';
   static const String validToken = '$baseUrl/validateToken';
   static const String sendPhoneCode = '$baseUrl/v1/users/passwords';
   static const String checkPhoneCode = '$baseUrl/v1/users/passwords/codes';
@@ -14,5 +15,9 @@ abstract class Endpoints {
 
   static String changeUserProfile(String userId) {
     return '$baseUrl/v1/users/$userId';
+  }
+
+  static String listLegend(String userId) {
+    return '$baseUrl/v1/user/$userId/legend';
   }
 }
