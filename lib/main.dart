@@ -18,8 +18,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'liberbox',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.white.withAlpha(190)),
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+        ).copyWith(
+          primary: Colors.blue,
+          secondary: Colors.blue,
+          surfaceTint: Colors.blue,
+        ),
+      ),
       initialRoute: PagesRoutes.splashRoute,
       getPages: Pages.pages,
     );

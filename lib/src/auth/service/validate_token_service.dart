@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/auth/model/user_login.dart';
 import 'package:liberbox_mobile/src/auth/repository/validate_token_repository.dart';
 import 'package:liberbox_mobile/src/config/constants/storage_keys.dart';
@@ -32,6 +33,9 @@ class ValidateTokenService {
       return;
     }
 
-    await execute(user!.authorization!);
+    final authController = Get.find<AuthController>();
+
+    authController.user = user!;
+    await execute(user.authorization!);
   }
 }

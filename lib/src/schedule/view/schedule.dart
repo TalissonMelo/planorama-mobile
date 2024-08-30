@@ -117,98 +117,79 @@ class _ScheduleState extends State<Schedule> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Form(
-                  key: formSchedule,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        child: Text(
-                          'Cadastrar Agenda',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      CustomTextField(
-                          icon: Icons.description,
-                          label: 'Nome',
-                          validator: descriptionValidator,
-                          controller: nameController,
-                          keyboardType: TextInputType.text),
-                      TextFormField(
-                        controller: startTimeController,
-                        validator: timeValidator,
-                        decoration: const InputDecoration(
-                          labelText: 'Horário Inicial',
-                          icon: Icon(Icons.access_time),
-                        ),
-                        keyboardType: TextInputType.datetime,
-                        inputFormatters: [timeFormatter],
-                      ),
-                      TextFormField(
-                        controller: endTimeController,
-                        validator: timeValidator,
-                        decoration: const InputDecoration(
-                          labelText: 'Horário Final',
-                          icon: Icon(Icons.access_time),
-                        ),
-                        keyboardType: TextInputType.datetime,
-                        inputFormatters: [timeFormatter],
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: createScheduleController.isLoading.value
-                              ? null
-                              : () {
-                                  FocusScope.of(context).unfocus();
-                                  if (formSchedule.currentState!.validate()) {
-                                    createScheduleController.created(
-                                      name: nameController.text,
-                                      endTime: endTimeController.text,
-                                      startTime: startTimeController.text,
-                                    );
-
-                                    Navigator.pop(context);
-                                  }
-                                },
-                          child: const Text('Cadastrar',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
-                        ),
-                      ),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Form(
+              key: formSchedule,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      'Cadastrar Agenda',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.red,
+                  CustomTextField(
+                      icon: Icons.description,
+                      label: 'Nome',
+                      validator: descriptionValidator,
+                      controller: nameController,
+                      keyboardType: TextInputType.text),
+                  TextFormField(
+                    controller: startTimeController,
+                    validator: timeValidator,
+                    decoration: const InputDecoration(
+                      labelText: 'Horário Inicial',
+                      icon: Icon(Icons.access_time),
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    inputFormatters: [timeFormatter],
                   ),
-                ),
+                  TextFormField(
+                    controller: endTimeController,
+                    validator: timeValidator,
+                    decoration: const InputDecoration(
+                      labelText: 'Horário Final',
+                      icon: Icon(Icons.access_time),
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    inputFormatters: [timeFormatter],
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    height: 40,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: createScheduleController.isLoading.value
+                          ? null
+                          : () {
+                              FocusScope.of(context).unfocus();
+                              if (formSchedule.currentState!.validate()) {
+                                createScheduleController.created(
+                                  name: nameController.text,
+                                  endTime: endTimeController.text,
+                                  startTime: startTimeController.text,
+                                );
+                                Navigator.pop(context);
+                              }
+                            },
+                      child: const Text('Cadastrar',
+                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },

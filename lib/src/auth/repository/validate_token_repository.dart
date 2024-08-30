@@ -9,8 +9,10 @@ class ValidateTokenRepository {
   Future<CustomApiAdvice> validateToken(String token) async {
     return await _httpManager.restRequest(
       url: Endpoints.validToken,
-      methodHttp: HttpMethods.post,
-      headers: {'Authorization': token},
+      methodHttp: HttpMethods.get,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
     );
   }
 }

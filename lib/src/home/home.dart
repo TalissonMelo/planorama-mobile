@@ -9,18 +9,19 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
-  static const List<Widget> _pages = <Widget>[
-    RegisteredAppointments(),
-    AvailableTimes()
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -29,25 +30,41 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
-        title: const Text('liberbox', style: TextStyle(color: Colors.white)),
+        title: const Column(
+          children: [
+            Text(
+              'liberbox To liberbox And liberbox',
+              style: TextStyle(color: Colors.white),
+            ),
+            /*
+            Uncomment the following lines to add an image below the text.
+            Image.asset(
+              'assets/your_image.png', // Replace with your image path
+              height: 50.0, // Adjust the size as needed
+            ),
+            */
+          ],
+        ),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              icon: Icon(Icons.event, color: Colors.white), // Ícone branco
+              child: Text('Liberbox', style: TextStyle(color: Colors.white)),
+            ),
+            Tab(
+              icon: Icon(Icons.schedule, color: Colors.white), // Ícone branco
+              child: Text('Liberbox', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
       ),
-      body: Center(
-        child: _pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: 'Agendamentos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.schedule),
-            label: 'Horários Disponíveis',
-          ),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          RegisteredAppointments(),
+          AvailableTimes(),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
       ),
     );
   }

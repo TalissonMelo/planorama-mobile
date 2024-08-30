@@ -32,7 +32,7 @@ class _LegendState extends State<Legend> {
   void fetchLegends() async {
     List<LegendResponse> fetchedLegends = await listLegendController.list();
     setState(() {
-      legends = fetchedLegends;
+      legends = List.from(fetchedLegends);
     });
   }
 
@@ -45,8 +45,9 @@ class _LegendState extends State<Legend> {
         title: const Text('Legendas', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-            onPressed: () {
-              addLegend();
+            onPressed: () async {
+              await addLegend();
+              setState(() {});
             },
             icon: const Icon(Icons.add_circle),
             color: Colors.white,
@@ -114,26 +115,27 @@ class _LegendState extends State<Legend> {
                     controller: descriptionController,
                     keyboardType: TextInputType.text,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Selecione uma cor',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(
-                          height: 100,
-                          child: BlockPicker(
-                            pickerColor: selectedColor,
-                            onColorChanged: (color) {
-                              selectedColor = color;
-                              colorController.text =
-                                  '#${color.value.toRadixString(16).padLeft(8, '0').substring(2)}';
-                            },
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Selecione uma cor',
+                            style: TextStyle(fontSize: 16),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: BlockPicker(
+                              pickerColor: selectedColor,
+                              onColorChanged: (color) {
+                                selectedColor = color;
+                                colorController.text =
+                                    '#${color.value.toRadixString(16).padLeft(8, '0').substring(2)}';
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -148,12 +150,21 @@ class _LegendState extends State<Legend> {
                       ),
                       onPressed: createLegendController.isLoading.value
                           ? null
-                          : () {
+                          : () async {
                               FocusScope.of(context).unfocus();
                               if (formLegend.currentState!.validate()) {
-                                createLegendController.created(
-                                    description: descriptionController.text,
-                                    color: colorController.text);
+                                LegendResponse? response =
+                                    await createLegendController.created(
+                                        description: descriptionController.text,
+                                        color: colorController.text);
+
+                                if (response != null) {
+                                  legends.insert(0, response);
+                                  descriptionController.text = "";
+                                }
+
+                                if (!context.mounted) return;
+
                                 Navigator.pop(context);
                               }
                             },

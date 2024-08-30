@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
-import 'package:liberbox_mobile/src/util/validator_email.dart';
-import 'package:liberbox_mobile/src/util/validator_password.dart';
+
+import '../../util/validator_email.dart';
+import '../../util/validator_password.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

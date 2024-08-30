@@ -146,10 +146,10 @@ class _ProfileState extends State<Profile> {
             ),
             child: Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Form(
-                    key: formPassword,
+                Form(
+                  key: formPassword,
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -184,7 +184,7 @@ class _ProfileState extends State<Profile> {
                           controller: passwordConfirmController,
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 40,
                           width: double.infinity,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(

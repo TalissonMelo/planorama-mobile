@@ -63,7 +63,7 @@ class _CustomCardState extends State<CustomCard> {
                 children: [
                   const Icon(Icons.access_time, color: Colors.blue),
                   const SizedBox(width: 8),
-                  Text('Início: ${widget.start.split('T')[1]}'),
+                  Text('Início: ${widget.start}'),
                 ],
               ),
               const SizedBox(height: 4),
@@ -71,7 +71,7 @@ class _CustomCardState extends State<CustomCard> {
                 children: [
                   const Icon(Icons.access_time, color: Colors.blue),
                   const SizedBox(width: 8),
-                  Text('Fim: ${widget.end.split('T')[1]}'),
+                  Text('Fim: ${widget.end}'),
                 ],
               ),
             ],

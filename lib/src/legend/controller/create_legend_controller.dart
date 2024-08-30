@@ -22,13 +22,13 @@ class CreateLegendController extends GetxController {
       description: description,
     ));
 
-    result.when(success: (response) {
+    return result.when(success: (response) {
+      isLoading.value = false;
       return response;
     }, error: (message) {
+      isLoading.value = false;
       toast.showToast(message: message, isError: true);
+      return null;
     });
-
-    isLoading.value = false;
-    return null;
   }
 }
