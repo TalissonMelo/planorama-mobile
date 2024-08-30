@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
+import 'package:liberbox_mobile/src/home/controller/free_time_schedule_controller.dart';
+import 'package:liberbox_mobile/src/home/domain/available_time.dart';
 
-class AvailableTime extends StatefulWidget {
-  const AvailableTime({super.key});
+class AvailableTimes extends StatefulWidget {
+  const AvailableTimes({super.key});
 
   @override
-  State<AvailableTime> createState() => _AvailableTimeState();
+  State<AvailableTimes> createState() => _AvailableTimeState();
 }
 
-class _AvailableTimeState extends State<AvailableTime> {
+class _AvailableTimeState extends State<AvailableTimes> {
   int _selectedDuration = 30;
 
   final List<Map<String, dynamic>> _selectedDurations = [
@@ -18,12 +20,22 @@ class _AvailableTimeState extends State<AvailableTime> {
     {'value': 120, 'label': '2 horas'},
   ];
 
+  final freeTimeScheduleController = FreeTimeScheduleController();
+  List<AvailableTime> schedules = [];
+
   @override
   void initState() {
     super.initState();
+    fetchFreeTimeSchedules();
   }
 
-  final List<Map<String, dynamic>> schedules = [];
+  void fetchFreeTimeSchedules() async {
+    List<AvailableTime> availableTimes =
+        await freeTimeScheduleController.list(minutes: _selectedDuration);
+    setState(() {
+      schedules = availableTimes;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +58,15 @@ class _AvailableTimeState extends State<AvailableTime> {
               items: _selectedDurations.map((Map<String, dynamic> duration) {
                 return DropdownMenuItem<int>(
                   value: duration['value'],
-                  child: Text(duration['label']),
+                  child: Text(
+                    duration['label'],
+                  ),
                 );
               }).toList(),
               onChanged: (int? newValue) {
                 setState(() {
                   _selectedDuration = newValue!;
+                  fetchFreeTimeSchedules();
                 });
               },
               style: const TextStyle(color: Colors.black),
@@ -64,10 +79,22 @@ class _AvailableTimeState extends State<AvailableTime> {
               itemCount: schedules.length,
               itemBuilder: (context, index) {
                 final schedule = schedules[index];
-                return CustomCard(
-                  title: schedule['name']!,
-                  start: schedule['start'],
-                  end: schedule['end'],
+                return Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: schedule.times.length,
+                      itemBuilder: (context, timeIndex) {
+                        final time = schedule.times[timeIndex];
+                        return CustomCard(
+                          title: schedule.title,
+                          start: time.startTime,
+                          end: time.endTime,
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
             ),

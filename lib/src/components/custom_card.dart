@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class CustomCard extends StatefulWidget {
   final String title;
   final String? description;
-  final DateTime start;
-  final DateTime end;
+  final String start;
+  final String end;
 
   const CustomCard({
     super.key,
@@ -59,25 +58,22 @@ class _CustomCardState extends State<CustomCard> {
                     ),
                   ],
                 ),
-              if (widget.start != null) const SizedBox(height: 8),
-              if (widget.start != null)
-                Row(
-                  children: [
-                    const Icon(Icons.access_time, color: Colors.blue),
-                    const SizedBox(width: 8),
-                    Text(
-                        'Início: ${DateFormat('HH:mm').format(widget.start!)}'),
-                  ],
-                ),
-              if (widget.end != null) const SizedBox(height: 4),
-              if (widget.end != null)
-                Row(
-                  children: [
-                    const Icon(Icons.access_time, color: Colors.blue),
-                    const SizedBox(width: 8),
-                    Text('Fim: ${DateFormat('HH:mm').format(widget.end!)}'),
-                  ],
-                ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(Icons.access_time, color: Colors.blue),
+                  const SizedBox(width: 8),
+                  Text('Início: ${widget.start.split('T')[1]}'),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  const Icon(Icons.access_time, color: Colors.blue),
+                  const SizedBox(width: 8),
+                  Text('Fim: ${widget.end.split('T')[1]}'),
+                ],
+              ),
             ],
           ),
         ),

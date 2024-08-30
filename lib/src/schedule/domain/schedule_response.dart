@@ -12,4 +12,14 @@ class ScheduleResponse {
     required this.endTime,
     required this.startTime,
   });
+
+  static ScheduleResponse fromMap(Map map) {
+    return ScheduleResponse(
+      id: map['id'],
+      name: map['name'],
+      ownerId: map['ownerId'],
+      endTime: map['endTime'],
+      startTime: map['startTime'],
+    );
+  }
 }

@@ -8,4 +8,12 @@ class ScheduleRequest {
     required this.endTime,
     required this.startTime,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'endTime': endTime,
+      'startTime': startTime,
+    };
+  }
 }

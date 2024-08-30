@@ -6,4 +6,5 @@ abstract class PagesRoutes {
   static const String phoneCodeRoute = '/phone';
   static const String checkPhoneCodeRoute = '/phone-check';
   static const String recoverPasswordRoute = '/password';
+  static const String termsRoute = '/terms';
 }

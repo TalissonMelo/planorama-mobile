@@ -7,6 +7,7 @@ class HttpManager {
     required String methodHttp,
     Map? headers,
     Map? body,
+    Map<String, dynamic>? params,
   }) async {
     final defaultHeaders = headers?.cast<String, String>() ?? {}
       ..addAll({
@@ -24,6 +25,7 @@ class HttpManager {
           method: methodHttp,
         ),
         data: body,
+        queryParameters: params,
       );
 
       return CustomApiAdvice(success: true, data: response.data);

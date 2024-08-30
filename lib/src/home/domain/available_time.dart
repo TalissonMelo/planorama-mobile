@@ -10,4 +10,12 @@ class AvailableTime {
     required this.title,
     required this.times,
   });
+
+  static AvailableTime fromMap(Map map) {
+    return AvailableTime(
+      id: map['id'],
+      title: map['title'],
+      times: (map['times'] as List).map((item) => Times.fromMap(item)).toList(),
+    );
+  }
 }

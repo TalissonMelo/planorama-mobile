@@ -203,8 +203,8 @@ class _SessionState extends State<Session> {
                       },
                       child: CustomCard(
                         title: event.title,
-                        start: event.start,
-                        end: event.end,
+                        start: event.start.toString(),
+                        end: event.end.toString(),
                         description: event.description,
                       ),
                     ),

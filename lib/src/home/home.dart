@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/home/view/available_time.dart';
+import 'package:liberbox_mobile/src/home/view/available_times.dart';
 import 'package:liberbox_mobile/src/home/view/registered_appointments.dart';
 
 class Home extends StatefulWidget {
@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
 
   static const List<Widget> _pages = <Widget>[
     RegisteredAppointments(),
-    AvailableTime()
+    AvailableTimes()
   ];
 
   void _onItemTapped(int index) {
