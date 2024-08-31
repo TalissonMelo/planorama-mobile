@@ -11,8 +11,8 @@ class CustomToast {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 3,
-      backgroundColor: isError ? Colors.red : Colors.white,
-      textColor: isError ? Colors.white : Colors.black,
+      backgroundColor: isError ? Colors.red : Colors.green,
+      textColor: Colors.white,
       fontSize: 14,
     );
   }

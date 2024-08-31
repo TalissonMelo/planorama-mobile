@@ -9,6 +9,7 @@ abstract class Endpoints {
   static const String listSchedules = '$baseUrl/v1/schedules';
   static const String sendPhoneCode = '$baseUrl/v1/users/passwords';
   static const String checkPhoneCode = '$baseUrl/v1/users/passwords/codes';
+  static const String userProfilePermissions = '$baseUrl/v1/users/profiles';
   static const String recoverPasswordCode = '$baseUrl/v1/users/passwords/codes';
 
   static const String listFreeTimesSchedules =

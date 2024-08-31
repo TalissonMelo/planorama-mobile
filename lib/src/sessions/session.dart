@@ -206,6 +206,7 @@ class _SessionState extends State<Session> {
                         start: event.start.toString(),
                         end: event.end.toString(),
                         description: event.description,
+                        isTime: true,
                       ),
                     ),
                   );

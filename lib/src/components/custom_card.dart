@@ -5,14 +5,16 @@ class CustomCard extends StatefulWidget {
   final String? description;
   final String start;
   final String end;
+  final bool isTime;
 
   const CustomCard({
-    super.key,
+    Key? key,
     required this.title,
     this.description,
     required this.start,
     required this.end,
-  });
+    required this.isTime,
+  }) : super(key: key);
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -22,9 +24,7 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 5,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8),
         shape: RoundedRectangleBorder(
@@ -63,7 +63,9 @@ class _CustomCardState extends State<CustomCard> {
                 children: [
                   const Icon(Icons.access_time, color: Colors.blue),
                   const SizedBox(width: 8),
-                  Text('Início: ${widget.start}'),
+                  Text(widget.isTime
+                      ? 'Início: ${widget.start}'
+                      : 'Início: ${widget.start.split('T')[1]}'),
                 ],
               ),
               const SizedBox(height: 4),
@@ -71,7 +73,9 @@ class _CustomCardState extends State<CustomCard> {
                 children: [
                   const Icon(Icons.access_time, color: Colors.blue),
                   const SizedBox(width: 8),
-                  Text('Fim: ${widget.end}'),
+                  Text(widget.isTime
+                      ? 'Fim: ${widget.end}'
+                      : 'Fim: ${widget.end.split('T')[1]}'),
                 ],
               ),
             ],

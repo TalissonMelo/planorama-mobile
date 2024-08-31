@@ -91,6 +91,7 @@ class _AvailableTimeState extends State<AvailableTimes> {
                           title: schedule.title,
                           start: time.startTime,
                           end: time.endTime,
+                          isTime: true,
                         );
                       },
                     ),

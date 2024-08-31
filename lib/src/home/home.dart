@@ -33,7 +33,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         title: const Column(
           children: [
             Text(
-              'liberbox To liberbox And liberbox',
+              'liberbox',
               style: TextStyle(color: Colors.white),
             ),
             /*

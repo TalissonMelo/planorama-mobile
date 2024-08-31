@@ -49,6 +49,7 @@ class _RegisteredAppointmentsState extends State<RegisteredAppointments> {
                     description: session.title,
                     start: session.startTime,
                     end: session.endTime,
+                    isTime: false,
                   );
                 },
               ),

@@ -24,6 +24,7 @@ class CreateLegendController extends GetxController {
 
     return result.when(success: (response) {
       isLoading.value = false;
+      toast.showToast(message: 'legenda criada com sucesso!.', isError: false);
       return response;
     }, error: (message) {
       isLoading.value = false;

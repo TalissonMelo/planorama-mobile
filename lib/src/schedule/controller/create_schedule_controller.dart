@@ -21,13 +21,14 @@ class CreateScheduleController extends GetxController {
     CreateScheduleResult result = await createScheduleService.execute(
         ScheduleRequest(name: name, endTime: endTime, startTime: startTime));
 
-    result.when(success: (response) {
+    return result.when(success: (response) {
+      isLoading.value = false;
+      toast.showToast(message: 'Agenda criada com sucesso!.', isError: false);
       return response;
     }, error: (message) {
+      isLoading.value = false;
       toast.showToast(message: message, isError: true);
+      return null;
     });
-
-    isLoading.value = false;
-    return null;
   }
 }
