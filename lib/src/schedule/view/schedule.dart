@@ -23,7 +23,9 @@ class _ScheduleState extends State<Schedule> {
   final userPermission = UserPermissionController();
   Future<UserPermissions?>? userPermissionFuture;
   List<ScheduleResponse> schedules = [];
+  List<ScheduleResponse> filteredSchedules = [];
   UserPermissions? user;
+  String searchQuery = '';
 
   @override
   void initState() {
@@ -36,6 +38,16 @@ class _ScheduleState extends State<Schedule> {
     List<ScheduleResponse> scheduleResponses = await scheduleController.list();
     setState(() {
       schedules = List.from(scheduleResponses);
+      filteredSchedules = List.from(scheduleResponses);
+    });
+  }
+
+  void applyFilter() {
+    setState(() {
+      filteredSchedules = schedules
+          .where((schedule) =>
+              schedule.name.toLowerCase().contains(searchQuery.toLowerCase()))
+          .toList();
     });
   }
 
@@ -82,6 +94,10 @@ class _ScheduleState extends State<Schedule> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
+                  onChanged: (value) {
+                    searchQuery = value;
+                    applyFilter();
+                  },
                   decoration: InputDecoration(
                       fillColor: Colors.grey.shade200,
                       isDense: true,
@@ -101,9 +117,9 @@ class _ScheduleState extends State<Schedule> {
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: schedules.length,
+                  itemCount: filteredSchedules.length,
                   itemBuilder: (context, index) {
-                    final schedule = schedules[index];
+                    final schedule = filteredSchedules[index];
                     return InkWell(
                       onTap: () {
                         Navigator.push(
