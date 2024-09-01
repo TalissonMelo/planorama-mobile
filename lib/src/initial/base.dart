@@ -22,7 +22,7 @@ class _BaseState extends State<Base> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: const [Home(), Legend(), Schedule(), Profile(), Session()],
+        children: const [Home(), Legend(), Schedule(), Profile()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,

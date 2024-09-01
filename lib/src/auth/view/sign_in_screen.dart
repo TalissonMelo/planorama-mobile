@@ -16,11 +16,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   bool _acceptedTerms = false;
 
   @override
