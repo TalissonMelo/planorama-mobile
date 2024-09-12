@@ -8,4 +8,5 @@ abstract class PagesRoutes {
   static const String recoverPasswordRoute = '/password';
   static const String termsRoute = '/terms';
   static const String sessionsRoute = '/session';
+  static const String chatRoute = '/chat';
 }

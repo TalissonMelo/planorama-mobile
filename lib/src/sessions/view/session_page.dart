@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:liberbox_mobile/src/chat/chat.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
 import 'package:liberbox_mobile/src/legend/controller/list_legend_schedule_controller.dart';
 import 'package:liberbox_mobile/src/legend/model/legend_response.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/sessions/controller/session_controller.dart';
 import 'package:liberbox_mobile/src/sessions/model/session_response.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -136,10 +137,35 @@ class _SessionPageState extends State<SessionPage> {
                   color: Colors.blue,
                   shape: BoxShape.circle,
                 ),
+                markersMaxCount: 5,
                 markerDecoration: const BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
+                  color: Colors.transparent,
                 ),
+                markerSizeScale: 0.15,
+              ),
+              calendarBuilders: CalendarBuilders(
+                markerBuilder: (context, date, events) {
+                  if (events.isEmpty) return const SizedBox();
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: events
+                        .map((event) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color:
+                                  (event as SessionResponse).color.colorValue,
+                            ),
+                          );
+                        })
+                        .take(5)
+                        .toList(),
+                  );
+                },
               ),
               headerStyle: HeaderStyle(
                 titleCentered: true,
@@ -193,12 +219,10 @@ class _SessionPageState extends State<SessionPage> {
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Chat(),
-                          ),
-                        );
+                        Get.toNamed(PagesRoutes.chatRoute, parameters: {
+                          'sessionId': event.id,
+                          'title': event.title
+                        });
                       },
                       child: CustomCard(
                         title: event.title,

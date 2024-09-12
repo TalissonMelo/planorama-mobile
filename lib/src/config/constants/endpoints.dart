@@ -34,4 +34,8 @@ abstract class Endpoints {
   static String listLegendScheduleId(String scheduleId) {
     return '$baseUrl/v1/schedules/$scheduleId/legends';
   }
+
+  static String createMessage(String sessionId) {
+    return '$baseUrl/v1/sessions/$sessionId/chat';
+  }
 }

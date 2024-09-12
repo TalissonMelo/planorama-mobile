@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class LegendColor {
   String primary;
   String secondary;
@@ -12,5 +14,14 @@ class LegendColor {
       primary: map['primary'],
       secondary: map['secondary'],
     );
+  }
+
+  Color get colorValue {
+    String hexColor = primary.replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF$hexColor';
+      return Color(int.parse(hexColor, radix: 16));
+    }
+    return Colors.black;
   }
 }

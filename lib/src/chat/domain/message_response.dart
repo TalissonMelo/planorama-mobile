@@ -1,8 +1,13 @@
-import 'dart:ffi';
-
 class MessageResponse {
   String content;
-  Bool user;
+  bool user;
 
   MessageResponse({required this.content, required this.user});
+
+  static MessageResponse fromMap(Map map) {
+    return MessageResponse(
+      content: map['content'],
+      user: map['user'] ?? false,
+    );
+  }
 }
