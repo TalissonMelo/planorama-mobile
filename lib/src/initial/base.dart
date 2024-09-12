@@ -3,7 +3,6 @@ import 'package:liberbox_mobile/src/home/home.dart';
 import 'package:liberbox_mobile/src/legend/view/legend.dart';
 import 'package:liberbox_mobile/src/profile/view/profile.dart';
 import 'package:liberbox_mobile/src/schedule/view/schedule.dart';
-import 'package:liberbox_mobile/src/sessions/session.dart';
 
 class Base extends StatefulWidget {
   const Base({super.key});

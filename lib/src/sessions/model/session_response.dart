@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:liberbox_mobile/src/sessions/model/legend_color.dart';
 
 class SessionResponse {
@@ -7,7 +8,7 @@ class SessionResponse {
   String title;
   DateTime start;
   DateTime end;
-  String description;
+  String? description;
 
   SessionResponse({
     required this.id,
@@ -16,6 +17,23 @@ class SessionResponse {
     required this.title,
     required this.start,
     required this.end,
-    required this.description,
+    this.description,
   });
+
+  static SessionResponse fromMap(Map map) {
+    return SessionResponse(
+      id: map['id'],
+      scheduleId: map['scheduleId'],
+      color: LegendColor.fromMap(map['color']),
+      title: map['title'],
+      start: DateTime.parse(map['start']), // Converte string para DateTime
+      end: DateTime.parse(map['end']), // Converte string para DateTime
+      description: map['description'],
+    );
+  }
+
+  String formatHour(DateTime dateTime) {
+    final DateFormat formatter = DateFormat('HH:mm');
+    return formatter.format(dateTime);
+  }
 }

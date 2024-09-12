@@ -49,12 +49,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: _tabController,
           tabs: const [
             Tab(
-              icon: Icon(Icons.event, color: Colors.white), // Ícone branco
-              child: Text('Liberbox', style: TextStyle(color: Colors.white)),
+              icon: Icon(Icons.event, color: Colors.white),
+              child: Text('Agendamentos', style: TextStyle(color: Colors.white)),
             ),
             Tab(
-              icon: Icon(Icons.schedule, color: Colors.white), // Ícone branco
-              child: Text('Liberbox', style: TextStyle(color: Colors.white)),
+              icon: Icon(Icons.schedule, color: Colors.white),
+              child: Text('Horários Disponíveis', style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

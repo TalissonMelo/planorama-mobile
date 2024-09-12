@@ -7,6 +7,7 @@ import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/recoverPassword/view/check_phone_code.dart';
 import 'package:liberbox_mobile/src/recoverPassword/view/recover_password.dart';
 import 'package:liberbox_mobile/src/recoverPassword/view/send_phone_code.dart';
+import 'package:liberbox_mobile/src/sessions/view/session_page.dart';
 import 'package:liberbox_mobile/src/user/view/sign_up_screen.dart';
 
 abstract class Pages {
@@ -47,6 +48,12 @@ abstract class Pages {
     GetPage(
       name: PagesRoutes.termsRoute,
       page: () => const Terms(),
+    ),
+    GetPage(
+      name: PagesRoutes.sessionsRoute,
+      page: () => SessionPage(
+        scheduleId: Get.parameters['scheduleId'] ?? '',
+      ),
     ),
   ];
 }

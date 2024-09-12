@@ -26,4 +26,8 @@ abstract class Endpoints {
   static String listLegend(String userId) {
     return '$baseUrl/v1/users/$userId/legends';
   }
+
+  static String sessionsToScheduleId(String scheduleId) {
+    return '$baseUrl/v1/schedule/$scheduleId/sessions';
+  }
 }

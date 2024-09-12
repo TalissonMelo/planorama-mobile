@@ -2,78 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:liberbox_mobile/src/chat/chat.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
-import 'package:liberbox_mobile/src/sessions/create_session.dart';
-import 'package:liberbox_mobile/src/sessions/model/legend_color.dart';
+import 'package:liberbox_mobile/src/sessions/controller/session_controller.dart';
 import 'package:liberbox_mobile/src/sessions/model/session_response.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class Session extends StatefulWidget {
-  const Session({super.key});
+class SessionPage extends StatefulWidget {
+  final String scheduleId;
+
+  const SessionPage({super.key, required this.scheduleId});
 
   @override
-  State<Session> createState() => _SessionState();
+  State<SessionPage> createState() => _SessionPageState();
 }
 
-class _SessionState extends State<Session> {
+class _SessionPageState extends State<SessionPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
+  final sessionController = SessionController();
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  late String scheduleId;
   List<SessionResponse> _events = [];
 
   @override
   void initState() {
     super.initState();
+    scheduleId = widget.scheduleId;
     initializeDateFormatting();
-    _events = [
-      SessionResponse(
-          id: '1',
-          scheduleId: '1',
-          color: LegendColor(primary: '#000', secondary: 'azul claro'),
-          title: 'Reunião',
-          start: DateTime.utc(2024, 7, 25, 10, 0),
-          end: DateTime.utc(2024, 7, 25, 11, 0),
-          description: 'Reunião importante'),
-      SessionResponse(
-          id: '2',
-          scheduleId: '2',
-          color: LegendColor(primary: '#000', secondary: 'verde claro'),
-          title: 'Consulta',
-          start: DateTime.utc(2024, 7, 28, 14, 0),
-          end: DateTime.utc(2024, 7, 28, 15, 0),
-          description: 'Consulta médica'),
-      SessionResponse(
-          id: '3',
-          scheduleId: '3',
-          color: LegendColor(primary: '#000', secondary: 'vermelho claro'),
-          title: 'Almoço com amigos',
-          start: DateTime.utc(2024, 7, 27, 12, 0),
-          end: DateTime.utc(2024, 7, 27, 13, 30),
-          description: 'Almoço no restaurante'),
-      SessionResponse(
-          id: '4',
-          scheduleId: '4',
-          color: LegendColor(primary: '#000', secondary: 'amarelo claro'),
-          title: 'Projeto final',
-          start: DateTime.utc(2024, 7, 27, 16, 0),
-          end: DateTime.utc(2024, 7, 27, 18, 0),
-          description: 'Trabalho no projeto final'),
-      SessionResponse(
-          id: '4',
-          scheduleId: '4',
-          color: LegendColor(primary: '#000', secondary: 'amarelo claro'),
-          title: 'Projeto final',
-          start: DateTime.utc(2024, 7, 27, 16, 0),
-          end: DateTime.utc(2024, 7, 27, 18, 0),
-          description: 'Trabalho no projeto final'),
-      SessionResponse(
-          id: '4',
-          scheduleId: '4',
-          color: LegendColor(primary: '#000', secondary: 'amarelo claro'),
-          title: 'Projeto final',
-          start: DateTime.utc(2024, 7, 27, 16, 0),
-          end: DateTime.utc(2024, 7, 27, 18, 0),
-          description: 'Trabalho no projeto final')
-    ];
+    fetchSessions();
+  }
+
+  void fetchSessions() async {
+    List<SessionResponse> fetchedSessions = await sessionController.list(
+      scheduleId,
+      _focusedDay.month,
+      _focusedDay.year,
+    );
+    setState(() {
+      _events = List.from(fetchedSessions);
+    });
   }
 
   List<SessionResponse> _getEventsForDay(DateTime day) {
@@ -92,20 +58,6 @@ class _SessionState extends State<Session> {
         backgroundColor: Colors.blue,
         title:
             const Text('Agendamentos', style: TextStyle(color: Colors.white)),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CreateSession(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.add_circle),
-            color: Colors.white,
-          ),
-        ],
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
@@ -180,7 +132,10 @@ class _SessionState extends State<Session> {
                 }
               },
               onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
+                setState(() {
+                  _focusedDay = focusedDay;
+                });
+                fetchSessions();
               },
             ),
           ),
@@ -203,8 +158,8 @@ class _SessionState extends State<Session> {
                       },
                       child: CustomCard(
                         title: event.title,
-                        start: event.start.toString(),
-                        end: event.end.toString(),
+                        start: event.formatHour(event.start),
+                        end: event.formatHour(event.end),
                         description: event.description,
                         isTime: true,
                       ),

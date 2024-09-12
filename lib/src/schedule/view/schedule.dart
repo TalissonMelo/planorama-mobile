@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/member/controller/user_permission_controller.dart';
 import 'package:liberbox_mobile/src/member/domain/user_permissions.dart';
+import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/schedule/controller/create_schedule_controller.dart';
 import 'package:liberbox_mobile/src/schedule/controller/schedule_controller.dart';
 import 'package:liberbox_mobile/src/schedule/domain/schedule_response.dart';
-import 'package:liberbox_mobile/src/sessions/session.dart';
 import 'package:liberbox_mobile/src/util/validator_description.dart';
 import 'package:liberbox_mobile/src/util/validator_time.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -122,12 +123,8 @@ class _ScheduleState extends State<Schedule> {
                     final schedule = filteredSchedules[index];
                     return InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Session(),
-                          ),
-                        );
+                        Get.toNamed(PagesRoutes.sessionsRoute,
+                            parameters: {'scheduleId': schedule.id});
                       },
                       child: CustomCard(
                         title: schedule.name,
