@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:liberbox_mobile/src/chat/chat.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
+import 'package:liberbox_mobile/src/legend/controller/list_legend_schedule_controller.dart';
+import 'package:liberbox_mobile/src/legend/model/legend_response.dart';
 import 'package:liberbox_mobile/src/sessions/controller/session_controller.dart';
 import 'package:liberbox_mobile/src/sessions/model/session_response.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -23,12 +25,16 @@ class _SessionPageState extends State<SessionPage> {
   late String scheduleId;
   List<SessionResponse> _events = [];
 
+  final listLegendController = ListLegendScheduleController();
+  List<LegendResponse> legends = [];
+
   @override
   void initState() {
     super.initState();
     scheduleId = widget.scheduleId;
     initializeDateFormatting();
     fetchSessions();
+    fetchLegends();
   }
 
   void fetchSessions() async {
@@ -39,6 +45,14 @@ class _SessionPageState extends State<SessionPage> {
     );
     setState(() {
       _events = List.from(fetchedSessions);
+    });
+  }
+
+  void fetchLegends() async {
+    List<LegendResponse> fetchedLegends =
+        await listLegendController.list(scheduleId);
+    setState(() {
+      legends = List.from(fetchedLegends);
     });
   }
 
@@ -71,6 +85,36 @@ class _SessionPageState extends State<SessionPage> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+          if (legends.isNotEmpty)
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: legends.map((legend) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: legend.colorValue,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            legend.description,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
           Container(
             padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
             child: TableCalendar(

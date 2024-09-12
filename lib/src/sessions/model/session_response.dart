@@ -26,8 +26,8 @@ class SessionResponse {
       scheduleId: map['scheduleId'],
       color: LegendColor.fromMap(map['color']),
       title: map['title'],
-      start: DateTime.parse(map['start']), // Converte string para DateTime
-      end: DateTime.parse(map['end']), // Converte string para DateTime
+      start: DateTime.parse(map['start']),
+      end: DateTime.parse(map['end']),
       description: map['description'],
     );
   }

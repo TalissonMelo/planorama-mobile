@@ -31,4 +31,18 @@ class LegendRepository {
           'X-UserID': userId,
         });
   }
+
+  Future<CustomApiAdvice> listLegendScheduleId(
+    String scheduleId,
+    String userId,
+    String token,
+  ) async {
+    return await _httpManager.restRequest(
+        url: Endpoints.listLegendScheduleId(scheduleId),
+        methodHttp: HttpMethods.get,
+        headers: {
+          'Authorization': token,
+          'X-UserID': userId,
+        });
+  }
 }
