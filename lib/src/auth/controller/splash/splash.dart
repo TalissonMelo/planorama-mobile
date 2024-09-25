@@ -8,7 +8,7 @@ class Splash extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0xFF0369FF),
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
@@ -23,7 +23,7 @@ class Splash extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(120.0),
                         child: Text(
-                          'liberbox',
+                          'Planorama',
                           style: TextStyle(color: Colors.white, fontSize: 30),
                         ),
                       ),

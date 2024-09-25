@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: const Color(0xFF0369FF),
         ).copyWith(
-          primary: Colors.blue,
-          secondary: Colors.blue,
-          surfaceTint: Colors.blue,
+          primary: const Color(0xFF0369FF),
+          secondary: const Color(0xFF0369FF),
+          surfaceTint: const Color(0xFF0369FF),
         ),
       ),
       initialRoute: PagesRoutes.splashRoute,

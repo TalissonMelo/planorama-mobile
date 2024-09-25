@@ -117,7 +117,7 @@ class _SessionPageState extends State<SessionPage> {
               ),
             ),
           Container(
-            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: TableCalendar(
               locale: 'pt_BR',
               firstDay: DateTime.utc(2024, 1, 1),
