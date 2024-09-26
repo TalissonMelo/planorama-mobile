@@ -19,85 +19,112 @@ class _SendPhoneCodeState extends State<SendPhoneCode> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          width: size.width,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  const Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Para recuperar sua senha, digite o email cadastrado no Liberbox.',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset(
+                    'assets/images/logo_planorama.png',
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Recuperar senha',
+                    style: TextStyle(
+                      fontFamily: 'Noto Sans',
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      height: 1.2,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Digite o email cadastrado no Planorama.',
+                    style: TextStyle(
+                      fontFamily: 'Rubik',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      height: 1.5,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(45)),
+                  ),
+                  child: Form(
+                    key: sendFormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Campo de Email
+                        CustomTextField(
+                          icon: Icons.email_outlined,
+                          label: 'Email',
+                          validator: emailValidator,
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0369FF),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            onPressed: sendPhoneCodeController.isLoading.value
+                                ? null
+                                : () {
+                                    FocusScope.of(context).unfocus();
+                                    if (sendFormKey.currentState!.validate()) {
+                                      sendPhoneCodeController.sendPhoneCode(
+                                        email: emailController.text,
+                                      );
+                                    }
+                                  },
+                            child: sendPhoneCodeController.isLoading.value
+                                ? const CircularProgressIndicator()
+                                : const Text(
+                                    'Continuar',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         ),
-                      ),
+                        const CustomReturnedLogin(),
+                      ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 40),
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(45))),
-                    child: Form(
-                      key: sendFormKey,
-                      child: Column(
-                        children: [
-                          CustomTextField(
-                              icon: Icons.email,
-                              label: 'Email',
-                              validator: emailValidator,
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress),
-                          SizedBox(
-                            height: 50,
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
-                              onPressed: sendPhoneCodeController.isLoading.value
-                                  ? null
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                      if (sendFormKey.currentState!
-                                          .validate()) {
-                                        sendPhoneCodeController.sendPhoneCode(
-                                          email: emailController.text,
-                                        );
-                                      }
-                                    },
-                              child: sendPhoneCodeController.isLoading.value
-                                  ? const CircularProgressIndicator()
-                                  : const Text(
-                                      'Continuar',
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.white),
-                                    ),
-                            ),
-                          ),
-                          const CustomReturnedLogin(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -54,9 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-
                 const SizedBox(height: 3),
-
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -70,9 +68,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Column(
@@ -110,10 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 10),
-
-                // Formulário de Login
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 40),
                   decoration: const BoxDecoration(
@@ -126,15 +119,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Campo de Email
                         CustomTextField(
                           controller: emailController,
                           icon: Icons.email_outlined,
                           label: 'Email',
                           validator: emailValidator,
                         ),
-
-                        // Campo de Senha
                         CustomTextField(
                           controller: passwordController,
                           icon: Icons.lock_outline,
@@ -142,10 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           isSecret: true,
                           validator: passwordValidator,
                         ),
-
                         const SizedBox(height: 10),
-
-                        // Esqueci minha senha com negrito
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -162,10 +149,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 20),
-
-                        // Botão Entrar agora
                         SizedBox(
                           height: 50,
                           child: GetX<AuthController>(

@@ -61,7 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       });
                     },
                     icon: Icon(isObscure
-                        ? Icons.visibility
+                        ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined),
                   )
                 : null,

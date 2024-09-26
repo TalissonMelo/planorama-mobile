@@ -10,14 +10,18 @@ class CustomReturnedLogin extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Align(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.center,
         child: TextButton(
             onPressed: () {
               Get.offNamed(PagesRoutes.loginInRoute);
             },
             child: const Text(
-              'Voltar a tela de login?',
-              style: TextStyle(color: Colors.blue),
+              'Cancelar',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF0369FF),
+                fontWeight: FontWeight.bold,
+              ),
             )),
       ),
     );
