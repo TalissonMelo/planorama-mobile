@@ -15,7 +15,7 @@ class Member {
 }
 
 enum MemberType {
-  CREATOR,
-  EDITOR,
-  VIEWER,
+  creator,
+  editor,
+  viewer,
 }

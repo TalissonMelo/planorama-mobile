@@ -98,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           'Criar agora',
                           style: TextStyle(
                             fontSize: 16,
-                            color: const Color(0xFF0369FF),
+                            color: Color(0xFF0369FF),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

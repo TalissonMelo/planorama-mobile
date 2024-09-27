@@ -8,13 +8,13 @@ class CustomCard extends StatefulWidget {
   final bool isTime;
 
   const CustomCard({
-    Key? key,
+    super.key,
     required this.title,
     this.description,
     required this.start,
     required this.end,
     required this.isTime,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomCard> createState() => _CustomCardState();
