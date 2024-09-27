@@ -1,11 +1,11 @@
 class PhoneNumber {
-  String phone;
+  String email;
 
   PhoneNumber({
-    required this.phone,
+    required this.email,
   });
 
   static PhoneNumber fromMap(Map map) {
-    return PhoneNumber(phone: map['phone']);
+    return PhoneNumber(email: map['email']);
   }
 }

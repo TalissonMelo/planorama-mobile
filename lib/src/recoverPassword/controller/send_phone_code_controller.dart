@@ -24,7 +24,7 @@ class SendPhoneCodeController extends GetxController {
 
     result.when(success: (phoneNumber) {
       Get.offAllNamed(PagesRoutes.checkPhoneCodeRoute,
-          parameters: {'phoneNumber': phoneNumber.phone});
+          parameters: {'phoneNumber': phoneNumber.email});
     }, error: (message) {
       toast.showToast(message: message, isError: true);
     });

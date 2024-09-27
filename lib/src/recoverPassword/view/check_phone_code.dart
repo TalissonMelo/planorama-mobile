@@ -68,7 +68,7 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Insira o código que foi enviado para o número $phoneNumber.',
+                    'Insira o código que foi enviado para o email $phoneNumber.',
                     style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
@@ -80,7 +80,7 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                 ),
                 const SizedBox(height: 20),
 
-                // Área do código de verificação
+
                 Form(
                   key: checkCodeFormKey,
                   child: Row(
