@@ -14,7 +14,7 @@ class UserPasswordService {
     final result = await userPasswordRepository.execute(
       authController.user.id!,
       password,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

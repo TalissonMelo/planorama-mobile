@@ -7,38 +7,23 @@ import 'package:liberbox_mobile/src/legend/model/legend_request.dart';
 class LegendRepository {
   final HttpManager _httpManager = HttpManager();
 
-  Future<CustomApiAdvice> listLegend(String userId, String token) async {
-    return await _httpManager.restRequest(
-        url: Endpoints.listLegend(userId),
-        methodHttp: HttpMethods.get,
-        headers: {
-          'Authorization': token,
-          'X-UserID': userId,
-        });
-  }
-
   Future<CustomApiAdvice> createLegend(
     String userId,
     String token,
     LegendRequest legend,
   ) async {
     return await _httpManager.restRequest(
-        url: Endpoints.createLegend,
+        url: Endpoints.createLegend(userId),
         methodHttp: HttpMethods.post,
         body: legend.toJson(),
         headers: {
           'Authorization': token,
-          'X-UserID': userId,
         });
   }
 
-  Future<CustomApiAdvice> listLegendScheduleId(
-    String scheduleId,
-    String userId,
-    String token,
-  ) async {
+  Future<CustomApiAdvice> listLegend(String userId, String token) async {
     return await _httpManager.restRequest(
-        url: Endpoints.listLegendScheduleId(scheduleId),
+        url: Endpoints.listLegend(userId),
         methodHttp: HttpMethods.get,
         headers: {
           'Authorization': token,

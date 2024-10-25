@@ -1,9 +1,17 @@
 const String baseUrl = "http://10.0.2.2:8080";
+const String baseUrlProd =
+    'https://p1of6von68.execute-api.us-east-1.amazonaws.com/prod';
 
 abstract class Endpoints {
-  static const String signin = '$baseUrl/login';
+  static String createLegend(String userId) {
+    return '$baseUrlProd/captions/users/$userId';
+  }
+
+  static String listLegend(String userId) {
+    return '$baseUrlProd/captions/users/$userId';
+  }
+
   static const String signup = '$baseUrl/v1/users';
-  static const String createLegend = '$baseUrl/v1/legends';
   static const String listSchedule = '$baseUrl/v1/schedule';
   static const String validToken = '$baseUrl/validateToken';
   static const String listSchedules = '$baseUrl/v1/schedules';
@@ -21,10 +29,6 @@ abstract class Endpoints {
 
   static String changeUserProfile(String userId) {
     return '$baseUrl/v1/users/$userId';
-  }
-
-  static String listLegend(String userId) {
-    return '$baseUrl/v1/users/$userId/legends';
   }
 
   static String sessionsToScheduleId(String scheduleId) {

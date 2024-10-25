@@ -11,7 +11,7 @@ class ScheduleService {
   Future<ScheduleResult> execute() async {
     final result = await schedulesRepository.listSchedules(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

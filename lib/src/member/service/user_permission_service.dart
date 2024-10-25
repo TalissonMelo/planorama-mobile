@@ -12,7 +12,7 @@ class UserPermissionService {
   Future<UserPermissionResult> execute() async {
     CustomApiAdvice result = await userPermissionRepository.execute(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

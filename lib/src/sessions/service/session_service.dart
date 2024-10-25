@@ -16,7 +16,7 @@ class SessionService {
     final result = await sessionRepository.execute(
         scheduleId,
         authController.user.id!,
-        'Bearer ${authController.user.authorization}',
+        'Bearer ${authController.user.accessToken}',
         month,
         year);
 

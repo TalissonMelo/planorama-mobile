@@ -11,7 +11,7 @@ class FreeTimeScheduleService {
   Future<FreeTimeScheduleResult> execute(int minutes) async {
     final result = await scheduleRepository.listFreeTimesSchedules(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
       minutes,
     );
 

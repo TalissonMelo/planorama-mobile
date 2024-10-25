@@ -11,7 +11,7 @@ class BusyScheduleService {
   Future<BusyScheduleResult> execute() async {
     final result = await scheduleRepository.listSchedules(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

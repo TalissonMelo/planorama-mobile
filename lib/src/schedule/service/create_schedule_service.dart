@@ -12,7 +12,7 @@ class CreateScheduleService {
   Future<CreateScheduleResult> execute(ScheduleRequest schedule) async {
     final result = await schedulesRepository.createSchedule(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
       schedule,
     );
 

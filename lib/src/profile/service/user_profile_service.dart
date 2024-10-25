@@ -15,7 +15,7 @@ class UserProfileService {
     final result = await userProfileRepository.execute(
       authController.user.id!,
       user,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

@@ -11,7 +11,7 @@ class ListLegendService {
   Future<ListLegendResult> execute() async {
     final result = await legendRepository.listLegend(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
-import 'package:liberbox_mobile/src/legend/controller/list_legend_schedule_controller.dart';
 import 'package:liberbox_mobile/src/legend/model/legend_response.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/sessions/controller/session_controller.dart';
@@ -26,7 +25,6 @@ class _SessionPageState extends State<SessionPage> {
   late String scheduleId;
   List<SessionResponse> _events = [];
 
-  final listLegendController = ListLegendScheduleController();
   List<LegendResponse> legends = [];
 
   @override
@@ -35,7 +33,6 @@ class _SessionPageState extends State<SessionPage> {
     scheduleId = widget.scheduleId;
     initializeDateFormatting();
     fetchSessions();
-    fetchLegends();
   }
 
   void fetchSessions() async {
@@ -46,14 +43,6 @@ class _SessionPageState extends State<SessionPage> {
     );
     setState(() {
       _events = List.from(fetchedSessions);
-    });
-  }
-
-  void fetchLegends() async {
-    List<LegendResponse> fetchedLegends =
-        await listLegendController.list(scheduleId);
-    setState(() {
-      legends = List.from(fetchedLegends);
     });
   }
 

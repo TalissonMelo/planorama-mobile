@@ -12,7 +12,7 @@ class CreateLegendService {
   Future<CreateLegendResult> execute(LegendRequest legend) async {
     final result = await legendRepository.createLegend(
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
       legend,
     );
 

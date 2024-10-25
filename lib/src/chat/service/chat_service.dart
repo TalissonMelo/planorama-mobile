@@ -17,7 +17,7 @@ class ChatService {
       sessionId,
       message,
       authController.user.id!,
-      'Bearer ${authController.user.authorization}',
+      'Bearer ${authController.user.accessToken}',
     );
 
     try {

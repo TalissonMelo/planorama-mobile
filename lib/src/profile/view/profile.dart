@@ -35,7 +35,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     super.initState();
     nameController.text = authController.user.nickname ?? '';
-    phoneController.text = authController.user.phone ?? '';
+    phoneController.text = authController.user.nickname ?? '';
   }
 
   @override

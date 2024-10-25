@@ -4,15 +4,15 @@ class UserLogin {
   String? id;
   String? email;
   String? nickname;
-  String? phone;
-  String? authorization;
+  String? accessToken;
+  String? refreshToken;
 
   UserLogin({
     this.id,
     this.email,
     this.nickname,
-    this.phone,
-    this.authorization,
+    this.accessToken,
+    this.refreshToken,
   });
 
   factory UserLogin.fromMap(Map map) {
@@ -20,8 +20,8 @@ class UserLogin {
         id: map['id'],
         email: map['email'],
         nickname: map['nickname'],
-        phone: map['phone'],
-        authorization: map['authorization']);
+        accessToken: map['accessToken'],
+        refreshToken: map['refreshToken']);
   }
 
   String toJson() => json.encode(toMap());
@@ -35,8 +35,8 @@ class UserLogin {
       id: map['id'],
       email: map['email'],
       nickname: map['nickname'],
-      phone: map['phone'],
-      authorization: map['authorization'],
+      accessToken: map['accessToken'],
+      refreshToken: map['refreshToken'],
     );
   }
 
@@ -45,8 +45,8 @@ class UserLogin {
       'id': id,
       'email': email,
       'nickname': nickname,
-      'phone': phone,
-      'authorization': authorization,
+      'accessToken': accessToken,
+      'refreshToken': refreshToken,
     };
   }
 }
