@@ -53,7 +53,6 @@ class AuthController extends GetxController {
       isLoading.value = false;
 
       if (session != null) {
-        print('Login realizado com sucesso!');
         final payload = session.getIdToken().decodePayload();
         final email = payload['email'];
         final username = payload['cognito:username'];
@@ -70,22 +69,13 @@ class AuthController extends GetxController {
         saveUserStorage();
         return session;
       } else {
-        print('Sessão inválida.');
         return null;
       }
     } on CognitoClientException catch (e) {
       isLoading.value = false;
-      if (e.code == 'UserNotFoundException') {
-        print('Usuário não encontrado.');
-      } else if (e.code == 'NotAuthorizedException') {
-        print('Senha ou email incorretos.');
-      } else {
-        print('Erro de login: ${e.message}');
-      }
       return null;
     } catch (e) {
       isLoading.value = false;
-      print('Erro inesperado: $e');
       return null;
     }
   }

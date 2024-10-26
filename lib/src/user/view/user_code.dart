@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
-import 'package:liberbox_mobile/src/recoverPassword/controller/check_phone_code_controller.dart';
 
-class CheckPhoneCode extends StatefulWidget {
-  final String phoneNumber;
-
-  const CheckPhoneCode({super.key, required this.phoneNumber});
+class UserCode extends StatefulWidget {
+  const UserCode({super.key});
 
   @override
-  State<CheckPhoneCode> createState() => _CheckPhoneCodeState();
+  State<UserCode> createState() => _UserCodeState();
 }
 
-class _CheckPhoneCodeState extends State<CheckPhoneCode> {
-  late String phoneNumber;
+class _UserCodeState extends State<UserCode> {
   final toast = CustomToast();
-
   final checkCodeFormKey = GlobalKey<FormState>();
-  final checkPhoneCodeController = CheckPhoneCodeController();
 
   final List<TextEditingController> codeControllers =
       List.generate(6, (index) => TextEditingController());
 
   final List<FocusNode> codeFocusNodes =
       List.generate(6, (index) => FocusNode());
-
-  @override
-  void initState() {
-    super.initState();
-    phoneNumber = widget.phoneNumber;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +55,11 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                   ),
                 ),
                 const SizedBox(height: 3),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Insira o código que foi enviado para o email $phoneNumber.',
-                    style: const TextStyle(
+                    'Insira o código que foi enviado para o email.',
+                    style: TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -136,7 +124,7 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                   child: TextButton(
                     onPressed: () {
                       toast.showToast(
-                        message: 'Código de recuperação enviado para o e-mail.',
+                        message: 'Código de confirmação enviado novamente!',
                         isError: false,
                       );
                     },
@@ -168,19 +156,8 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                         vertical: 15,
                       ),
                     ),
-                    onPressed: checkPhoneCodeController.isLoading.value
-                        ? null
-                        : () {
-                            FocusScope.of(context).unfocus();
-                            if (checkCodeFormKey.currentState!.validate()) {
-                              String code = codeControllers
-                                  .map((controller) => controller.text)
-                                  .join();
-                              checkPhoneCodeController.validCode(
-                                  code: code, email: phoneNumber);
-                            }
-                          },
-                    child: checkPhoneCodeController.isLoading.value
+                    onPressed: true ? null : null,
+                    child: false
                         ? const CircularProgressIndicator()
                         : const Text(
                             'Continuar',

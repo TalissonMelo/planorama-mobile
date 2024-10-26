@@ -8,7 +8,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../util/validator_name.dart';
 import '../../util/validator_password.dart';
-import '../../util/validator_phone.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -43,6 +42,9 @@ class _ProfileState extends State<Profile> {
     final phoneFormatter = MaskTextInputFormatter(
         mask: '## # ####-####', filter: {'#': RegExp(r'[0-9]')});
 
+    final cpfFormatter = MaskTextInputFormatter(
+        mask: '###.###.###-##', filter: {'#': RegExp(r'[0-9]')});
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -68,25 +70,34 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 CustomTextField(
-                  icon: Icons.email,
+                  icon: Icons.email_outlined,
                   label: "Email",
                   initialValue: authController.user.email,
+                  readOnly: true,
+                ),
+                const CustomTextField(
+                  icon: Icons.person_outline,
+                  label: "Nickname",
+                  validator: nameValidator,
                   readOnly: true,
                 ),
                 CustomTextField(
                   icon: Icons.person,
                   label: "Nome",
-                  validator: nameValidator,
                   controller: nameController,
                   keyboardType: TextInputType.text,
                 ),
                 CustomTextField(
-                    icon: Icons.phone,
+                    icon: Icons.phone_outlined,
                     label: "Telefone",
                     inputFormatters: [phoneFormatter],
-                    validator: phoneValidator,
                     controller: phoneController,
                     keyboardType: TextInputType.phone),
+                CustomTextField(
+                    icon: Icons.file_copy,
+                    label: "CPF",
+                    inputFormatters: [cpfFormatter],
+                    keyboardType: TextInputType.text),
               ],
             ),
           ),
@@ -128,7 +139,7 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {
                   updatePassword();
                 },
-                child: const Text('Atualizar senha',
+                child: const Text('Configurações',
                     style: TextStyle(fontSize: 18, color: Colors.white))),
           )
         ],

@@ -10,6 +10,7 @@ import 'package:liberbox_mobile/src/recoverPassword/view/recover_password.dart';
 import 'package:liberbox_mobile/src/recoverPassword/view/send_phone_code.dart';
 import 'package:liberbox_mobile/src/sessions/view/session_page.dart';
 import 'package:liberbox_mobile/src/user/view/sign_up_screen.dart';
+import 'package:liberbox_mobile/src/user/view/user_code.dart';
 
 abstract class Pages {
   static final pages = <GetPage>[
@@ -62,6 +63,10 @@ abstract class Pages {
         sessionId: Get.parameters['sessionId'] ?? '',
         title: Get.parameters['title'] ?? '',
       ),
+    ),
+    GetPage(
+      name: PagesRoutes.userCodeRoute,
+      page: () => const UserCode(),
     ),
   ];
 }

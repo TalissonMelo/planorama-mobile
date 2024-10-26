@@ -9,4 +9,5 @@ abstract class PagesRoutes {
   static const String termsRoute = '/terms';
   static const String sessionsRoute = '/session';
   static const String chatRoute = '/chat';
+  static const String userCodeRoute = '/user-code';
 }
