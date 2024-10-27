@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
+import 'package:liberbox_mobile/src/user/controller/user_code_controller.dart';
 
 class UserCode extends StatefulWidget {
-  const UserCode({super.key});
+  final String email;
+  const UserCode({super.key, required this.email});
 
   @override
   State<UserCode> createState() => _UserCodeState();
@@ -13,11 +14,21 @@ class _UserCodeState extends State<UserCode> {
   final toast = CustomToast();
   final checkCodeFormKey = GlobalKey<FormState>();
 
+  final userCodeController = UserCodeController();
+
   final List<TextEditingController> codeControllers =
       List.generate(6, (index) => TextEditingController());
 
   final List<FocusNode> codeFocusNodes =
       List.generate(6, (index) => FocusNode());
+
+  late String email;
+
+  @override
+  void initState() {
+    super.initState();
+    email = widget.email;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +66,11 @@ class _UserCodeState extends State<UserCode> {
                   ),
                 ),
                 const SizedBox(height: 3),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Insira o código que foi enviado para o email.',
-                    style: TextStyle(
+                    'Insira o código que foi enviado para o email: $email.',
+                    style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -156,11 +167,24 @@ class _UserCodeState extends State<UserCode> {
                         vertical: 15,
                       ),
                     ),
-                    onPressed: true ? null : null,
-                    child: false
+                    onPressed: userCodeController.isLoading.value
+                        ? null
+                        : () {
+                            FocusScope.of(context).unfocus();
+                            if (checkCodeFormKey.currentState!.validate()) {
+                              String code = codeControllers
+                                  .map((controller) => controller.text)
+                                  .join();
+                              userCodeController.validCode(
+                                code: code,
+                                email: email,
+                              );
+                            }
+                          },
+                    child: userCodeController.isLoading.value
                         ? const CircularProgressIndicator()
                         : const Text(
-                            'Continuar',
+                            'Finalizar Cadastro',
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.white,
@@ -168,7 +192,6 @@ class _UserCodeState extends State<UserCode> {
                           ),
                   ),
                 ),
-                const CustomReturnedLogin(),
               ],
             ),
           ),

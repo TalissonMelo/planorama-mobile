@@ -66,7 +66,9 @@ abstract class Pages {
     ),
     GetPage(
       name: PagesRoutes.userCodeRoute,
-      page: () => const UserCode(),
+      page: () => UserCode(
+        email: Get.parameters['email'] ?? '',
+      ),
     ),
   ];
 }
