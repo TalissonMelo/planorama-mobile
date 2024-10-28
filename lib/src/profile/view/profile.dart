@@ -5,9 +5,11 @@ import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/profile/controller/user_password_controller.dart';
 import 'package:liberbox_mobile/src/profile/controller/user_profile_controller.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../util/validator_name.dart';
-import '../../util/validator_password.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -21,44 +23,52 @@ class _ProfileState extends State<Profile> {
   final userPasswordController = UserPasswordController();
   final userProfileController = UserProfileController();
 
-  final formPassword = GlobalKey<FormState>();
-  final newPasswordController = TextEditingController();
-  final oldPasswordController = TextEditingController();
-  final passwordConfirmController = TextEditingController();
-
   final formProfile = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
+
+  List<String> timeZones = [];
+  String selectedTimeZone = '';
+  String selectedLanguage = '';
 
   @override
   void initState() {
     super.initState();
     nameController.text = authController.user.nickname ?? '';
     phoneController.text = authController.user.nickname ?? '';
+
+    tz.initializeTimeZones();
+    timeZones = tz.timeZoneDatabase.locations.keys.toList();
+
+    _loadSettings();
   }
 
   @override
   Widget build(BuildContext context) {
     final phoneFormatter = MaskTextInputFormatter(
-        mask: '## # ####-####', filter: {'#': RegExp(r'[0-9]')});
+      mask: '## # ####-####',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
 
     final cpfFormatter = MaskTextInputFormatter(
-        mask: '###.###.###-##', filter: {'#': RegExp(r'[0-9]')});
+      mask: '###.###.###-##',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
-        title: const Text('Perfil do usuário',
-            style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Perfil do Usuário',
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
-            onPressed: () {
-              authController.signOut();
-            },
+            onPressed: authController.signOut,
             icon: const Icon(Icons.logout),
             color: Colors.white,
-          )
+          ),
         ],
       ),
       body: ListView(
@@ -75,9 +85,10 @@ class _ProfileState extends State<Profile> {
                   initialValue: authController.user.email,
                   readOnly: true,
                 ),
-                const CustomTextField(
+                CustomTextField(
                   icon: Icons.person_outline,
                   label: "Nickname",
+                  initialValue: authController.user.nickname,
                   validator: nameValidator,
                   readOnly: true,
                 ),
@@ -88,158 +99,205 @@ class _ProfileState extends State<Profile> {
                   keyboardType: TextInputType.text,
                 ),
                 CustomTextField(
-                    icon: Icons.phone_outlined,
-                    label: "Telefone",
-                    inputFormatters: [phoneFormatter],
-                    controller: phoneController,
-                    keyboardType: TextInputType.phone),
+                  icon: Icons.phone_outlined,
+                  label: "Telefone",
+                  inputFormatters: [phoneFormatter],
+                  controller: phoneController,
+                  keyboardType: TextInputType.phone,
+                ),
                 CustomTextField(
-                    icon: Icons.file_copy,
-                    label: "CPF",
-                    inputFormatters: [cpfFormatter],
-                    keyboardType: TextInputType.text),
+                  icon: Icons.file_copy,
+                  label: "CPF",
+                  inputFormatters: [cpfFormatter],
+                  keyboardType: TextInputType.text,
+                ),
               ],
             ),
           ),
+          const SizedBox(height: 10),
           SizedBox(
             height: 50,
             child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(
-                    width: 2,
-                    color: Colors.blue,
-                  ),
-                ),
-                onPressed: userProfileController.isLoading.value
-                    ? null
-                    : () {
-                        FocusScope.of(context).unfocus();
-                        if (formProfile.currentState!.validate()) {
-                          userProfileController.changeProfile(
-                              nickname: nameController.text,
-                              phone: phoneController.text);
-                        }
-                      },
-                child: const Text(
-                  'Atualizar Perfil',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 18,
-                  ),
-                )),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(width: 2, color: Colors.blue),
+              ),
+              onPressed:
+                  userProfileController.isLoading.value ? null : _updateProfile,
+              child: const Text(
+                'Atualizar Perfil',
+                style: TextStyle(color: Colors.blue, fontSize: 18),
+              ),
+            ),
           ),
-          const Padding(padding: EdgeInsets.only(bottom: 10)),
+          const SizedBox(height: 10),
           SizedBox(
             height: 50,
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                onPressed: () {
-                  updatePassword();
-                },
-                child: const Text('Configurações',
-                    style: TextStyle(fontSize: 18, color: Colors.white))),
-          )
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+              onPressed: configuration,
+              child: const Text(
+                'Configurações',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Future<bool?> updatePassword() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Stack(
+  Future<void> configuration() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Form(
-                  key: formPassword,
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 12),
-                          child: Text(
-                            'Atualização de senha',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        CustomTextField(
-                          icon: Icons.lock,
-                          label: 'Senha atual',
-                          isSecret: true,
-                          validator: passwordValidator,
-                          controller: oldPasswordController,
-                        ),
-                        CustomTextField(
-                          icon: Icons.lock_outline,
-                          label: 'Nova senha',
-                          isSecret: true,
-                          validator: passwordValidator,
-                          controller: newPasswordController,
-                        ),
-                        CustomTextField(
-                          icon: Icons.lock_outline,
-                          label: 'Confirmar senha',
-                          isSecret: true,
-                          validator: passwordValidator,
-                          controller: passwordConfirmController,
-                        ),
-                        SizedBox(
-                          height: 40,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20))),
-                              onPressed: userPasswordController.isLoading.value
-                                  ? null
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                      if (formPassword.currentState!
-                                          .validate()) {
-                                        userPasswordController.changePassword(
-                                            oldPassword:
-                                                oldPasswordController.text,
-                                            newPassword:
-                                                newPasswordController.text,
-                                            passwordConfirm:
-                                                passwordConfirmController.text);
-                                      }
-                                    },
-                              child: userPasswordController.isLoading.value
-                                  ? const CircularProgressIndicator()
-                                  : const Text('Atualizar',
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.white))),
-                        )
-                      ],
-                    ),
+                Text(
+                  'configuracao'.tr,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'timezone'.tr,
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
-                Positioned(
-                  top: 5,
-                  right: 5,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.close),
+                const SizedBox(height: 10),
+                DropdownButton<String>(
+                  value: selectedTimeZone.isNotEmpty ? selectedTimeZone : null,
+                  hint: const Text('Selecione um Fuso Horário'),
+                  items: timeZones.map((tz) {
+                    return DropdownMenuItem(
+                      value: tz,
+                      child: Text(tz),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedTimeZone = value ?? '';
+                    });
+                  },
+                ),
+                const SizedBox(height: 20),
+                Text('DESCRIPTION'.tr, style: TextStyle(fontSize: 16)),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: selectedLanguage == 'en'
+                            ? Colors.blue
+                            : Colors.white,
+                        side: const BorderSide(color: Colors.blue),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () => switchLanguage('en'),
+                      child: Text(
+                        'English',
+                        style: TextStyle(
+                          color: selectedLanguage == 'en'
+                              ? Colors.white
+                              : Colors.blue,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: selectedLanguage == 'pt'
+                            ? Colors.blue
+                            : Colors.white,
+                        side: const BorderSide(color: Colors.blue),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () => switchLanguage('pt'),
+                      child: Text(
+                        'Português',
+                        style: TextStyle(
+                          color: selectedLanguage == 'pt'
+                              ? Colors.white
+                              : Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
+                    onPressed: saveSettings,
+                    child: Text(
+                      'salvar_configuracoes'.tr,
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
+  }
+
+  void switchLanguage(String language) {
+    setState(() {
+      selectedLanguage = language;
+      Get.updateLocale(Locale(language));
+    });
+  }
+
+  Future<void> saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedTimeZone', selectedTimeZone);
+    await prefs.setString('selectedLanguage', selectedLanguage);
+    print(selectedLanguage);
+    print(selectedTimeZone);
+    Navigator.pop(context);
+  }
+
+  Future<void> _loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedTimeZone = prefs.getString('selectedTimeZone') ?? '';
+      selectedLanguage = prefs.getString('selectedLanguage') ?? '';
+      Get.updateLocale(Locale(selectedLanguage));
+    });
+  }
+
+  void _updateProfile() {
+    if (formProfile.currentState!.validate()) {
+      userProfileController.changeProfile(
+        nickname: nameController.text,
+        phone: phoneController.text,
+      );
+    }
   }
 }

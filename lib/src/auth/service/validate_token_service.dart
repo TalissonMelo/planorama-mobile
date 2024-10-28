@@ -11,13 +11,7 @@ class ValidateTokenService {
   final utilService = UtilService();
 
   Future<void> execute(String token) async {
-    final result = await tokenRepository.validateToken(token);
-
-    if (!result.success) {
-      signOut();
-    } else {
-      Get.offAllNamed(PagesRoutes.baseRoute);
-    }
+    Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
   Future<void> signOut() async {

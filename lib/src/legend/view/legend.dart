@@ -54,30 +54,33 @@ class _LegendState extends State<Legend> {
           ),
         ],
       ),
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(0, 20, 5, 0),
-        itemCount: legends.length,
-        itemBuilder: (context, index) {
-          final legend = legends[index];
-          return Card(
-            child: ListTile(
-              leading: Icon(
-                Icons.label,
-                color: legend.colorValue,
-                size: 50,
-              ),
-              title: Text(
-                legend.description,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
+      body: listLegendController.isLoading.value
+          ? const Center(
+              child: CircularProgressIndicator()) // Loading Indicator
+          : ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.fromLTRB(0, 20, 5, 0),
+              itemCount: legends.length,
+              itemBuilder: (context, index) {
+                final legend = legends[index];
+                return Card(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.label,
+                      color: legend.colorValue,
+                      size: 50,
+                    ),
+                    title: Text(
+                      legend.description,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 

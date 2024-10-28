@@ -69,15 +69,22 @@ class AuthController extends GetxController {
         saveUserStorage();
         return session;
       } else {
+        errorSignIn();
         return null;
       }
     } on CognitoClientException catch (e) {
+      errorSignIn();
       isLoading.value = false;
       return null;
     } catch (e) {
+      errorSignIn();
       isLoading.value = false;
       return null;
     }
+  }
+
+  void errorSignIn() {
+    toast.showToast(message: 'E-mail ou senha, incorretos.', isError: true);
   }
 
   Future<void> signOut() async {

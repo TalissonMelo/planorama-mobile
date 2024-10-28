@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/pages_routes/pages.dart';
+import 'package:liberbox_mobile/src/profile/service/TranslationService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   Get.put(AuthController());
+
+  final translationService = TranslationService();
+  await translationService.loadTranslations();
+
   runApp(const MyApp());
 }
 
@@ -18,7 +24,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'liberbox',
+      title: 'Planorama',
+      translations: TranslationService(),
+      locale: Get.deviceLocale ?? const Locale('en'),
+      fallbackLocale: const Locale('en'),
+      supportedLocales: const [
+        Locale('en'),
+        Locale('pt'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
