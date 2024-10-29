@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
-import 'package:liberbox_mobile/src/profile/model/user_password_change.dart';
-import 'package:liberbox_mobile/src/profile/repository/user_password_repository.dart';
+import 'package:liberbox_mobile/src/profile/model/configuration.dart';
+import 'package:liberbox_mobile/src/profile/repository/configuration_repository.dart';
 import 'package:liberbox_mobile/src/profile/service/result/user_password_result.dart';
 
-class UserPasswordService {
-  final userPasswordRepository = UserPasswordRepository();
+class ConfigurationService {
+  final configurationRepository = ConfigurationRepository();
   final authController = Get.find<AuthController>();
 
   Future<UserPasswordResult> execute(
-    UserPasswordChange password,
+    Configuration configuration,
   ) async {
-    final result = await userPasswordRepository.execute(
+    final result = await configurationRepository.execute(
       authController.user.id!,
-      password,
+      configuration,
       'Bearer ${authController.user.accessToken}',
     );
 

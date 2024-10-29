@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:liberbox_mobile/src/auth/model/user_login.dart';
+import 'package:liberbox_mobile/src/profile/model/configuration.dart';
 
 class UtilService {
   final storage = const FlutterSecureStorage();
@@ -26,7 +25,19 @@ class UtilService {
     await storage.delete(key: key);
   }
 
-  String encodePassword(String password) {
-    return base64Encode(utf8.encode(password));
+  Future<void> settings({
+    required String key,
+    required Configuration configuration,
+  }) async {
+    String configurationJson = configuration.toJson();
+    await storage.write(key: key, value: configurationJson);
+  }
+
+  Future<Configuration?> getLocalSettings({required String key}) async {
+    String? configuration = await storage.read(key: key);
+    if (configuration != null) {
+      return Configuration.fromJson(configuration);
+    }
+    return null;
   }
 }

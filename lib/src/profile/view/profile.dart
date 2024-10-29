@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/profile/controller/user_password_controller.dart';
+import 'package:liberbox_mobile/src/profile/controller/configuration_controller.dart';
 import 'package:liberbox_mobile/src/profile/controller/user_profile_controller.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +20,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final authController = Get.find<AuthController>();
-  final userPasswordController = UserPasswordController();
   final userProfileController = UserProfileController();
+  final configurationController = ConfigurationController();
 
   final formProfile = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -275,11 +275,8 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> saveSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedTimeZone', selectedTimeZone);
-    await prefs.setString('selectedLanguage', selectedLanguage);
-    print(selectedLanguage);
-    print(selectedTimeZone);
+    await configurationController.settings(
+        timeZone: selectedTimeZone, language: selectedLanguage);
     Navigator.pop(context);
   }
 

@@ -6,11 +6,16 @@ import 'package:liberbox_mobile/src/auth/service/validate_token_service.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
 import 'package:liberbox_mobile/src/config/constants/storage_keys.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
+import 'package:liberbox_mobile/src/profile/model/configuration.dart';
+import 'package:liberbox_mobile/src/profile/service/list_configuration_service.dart';
+import 'package:liberbox_mobile/src/profile/service/result/configuration_result.dart';
 import 'package:liberbox_mobile/src/util/util_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   UserLogin user = UserLogin();
+  Configuration? configuration;
 
   final userPool = CognitoUserPool(
     dotenv.env['COGNITO_USER_POOL_ID'] ?? '',
@@ -18,6 +23,7 @@ class AuthController extends GetxController {
   );
 
   final validateToken = ValidateTokenService();
+  final configurationService = ListConfigurationService();
   final utilService = UtilService();
   final toast = CustomToast();
 
@@ -27,8 +33,26 @@ class AuthController extends GetxController {
     validToken();
   }
 
-  void saveUserStorage() {
-    utilService.saveLocalUser(key: StorageKeys.user, login: user);
+  void saveUserStorage() async {
+    await utilService.saveLocalUser(key: StorageKeys.user, login: user);
+
+    ConfigurationResult result =
+        await configurationService.execute(user.id!, user.accessToken!);
+
+    result.when(
+        success: (response) async {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('selectedTimeZone', response.timeZone ?? '');
+          await prefs.setString('selectedLanguage', response.language ?? '');
+
+          await utilService.settings(
+            key: StorageKeys.settings,
+            configuration: response,
+          );
+        },
+        error: (message) {});
+
+    isLoading.value = false;
     Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
@@ -50,7 +74,6 @@ class AuthController extends GetxController {
 
     try {
       final session = await cognitoUser.authenticateUser(authDetails);
-      isLoading.value = false;
 
       if (session != null) {
         final payload = session.getIdToken().decodePayload();
@@ -74,22 +97,20 @@ class AuthController extends GetxController {
       }
     } on CognitoClientException catch (e) {
       errorSignIn();
-      isLoading.value = false;
       return null;
     } catch (e) {
       errorSignIn();
-      isLoading.value = false;
       return null;
     }
   }
 
   void errorSignIn() {
     toast.showToast(message: 'E-mail ou senha, incorretos.', isError: true);
+    isLoading.value = false;
   }
 
   Future<void> signOut() async {
     user = UserLogin();
-
     await utilService.removeLocalData(key: StorageKeys.user);
     Get.offAllNamed(PagesRoutes.loginInRoute);
   }

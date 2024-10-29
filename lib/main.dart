@@ -6,11 +6,14 @@ import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/pages_routes/pages.dart';
 import 'package:liberbox_mobile/src/profile/service/TranslationService.dart';
+import 'package:liberbox_mobile/src/profile/service/list_configuration_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   Get.put(AuthController());
+
+  Get.lazyPut(() => ListConfigurationService());
 
   final translationService = TranslationService();
   await translationService.loadTranslations();
