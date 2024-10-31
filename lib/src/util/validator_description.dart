@@ -1,6 +1,6 @@
 String? descriptionValidator(String? description) {
   if (description == null || description.isEmpty) {
-    return 'Digite uma descrição!';
+    return 'Enter a description!';
   }
   return null;
 }

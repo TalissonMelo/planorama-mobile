@@ -166,14 +166,15 @@ class _ProfileState extends State<Profile> {
               children: [
                 Text(
                   'configuracao'.tr,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'timezone'.tr,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -193,7 +194,7 @@ class _ProfileState extends State<Profile> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Text('DESCRIPTION'.tr, style: TextStyle(fontSize: 16)),
+                Text('DESCRIPTION'.tr, style: const TextStyle(fontSize: 16)),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

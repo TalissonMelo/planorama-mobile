@@ -35,18 +35,18 @@ class RecoverPasswordController extends GetxController {
         );
 
         toast.showToast(
-          message: 'Senha alterada com sucesso!',
+          message: 'Password changed successfully!',
           isError: false,
         );
         Get.offAllNamed(PagesRoutes.loginInRoute);
       } on CognitoClientException catch (e) {
         toast.showToast(
-          message: 'Erro: ${e.message ?? 'Falha ao redefinir a senha.'}',
+          message: 'Error: ${e.message ?? 'Failed to reset password.'}',
           isError: true,
         );
       } catch (e) {
         toast.showToast(
-          message: 'Ocorreu um erro inesperado. Tente novamente.',
+          message: 'An unexpected error has occurred. Please try again.',
           isError: true,
         );
       } finally {
@@ -54,8 +54,9 @@ class RecoverPasswordController extends GetxController {
       }
     } else {
       toast.showToast(
-          message: 'Senhas não conferem. Por favor, tente novamente.',
-          isError: true);
+        message: 'Passwords do not match. Please try again.',
+        isError: true,
+      );
     }
   }
 }

@@ -15,9 +15,9 @@ class CustomReturnedLogin extends StatelessWidget {
             onPressed: () {
               Get.offNamed(PagesRoutes.loginInRoute);
             },
-            child: const Text(
-              'Cancelar',
-              style: TextStyle(
+            child: Text(
+              'voltar_inicio'.tr,
+              style: const TextStyle(
                 fontSize: 16,
                 color: Color(0xFF0369FF),
                 fontWeight: FontWeight.bold,

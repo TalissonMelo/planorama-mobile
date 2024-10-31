@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/recoverPassword/controller/recover_password_controller.dart';
@@ -44,11 +45,11 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Redefinição de senha',
-                    style: TextStyle(
+                    'redefinir_senha'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
                       fontSize: 35,
                       fontWeight: FontWeight.w500,
@@ -59,11 +60,11 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Por favor, insira e confirme sua nova senha abaixo.',
-                    style: TextStyle(
+                    'digite_senha_description'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -87,7 +88,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                       children: [
                         CustomTextField(
                           icon: Icons.lock_outline,
-                          label: 'Senha',
+                          label: 'senha'.tr,
                           isSecret: true,
                           controller: passwordController,
                           validator: passwordValidator,
@@ -95,7 +96,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                         const SizedBox(height: 20),
                         CustomTextField(
                           icon: Icons.lock_outline,
-                          label: 'Confirme Senha',
+                          label: 'confirmar_senha'.tr,
                           isSecret: true,
                           controller: passwordConfirmController,
                           validator: passwordValidator,
@@ -127,9 +128,9 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                                   },
                             child: recoverPasswordController.isLoading.value
                                 ? const CircularProgressIndicator()
-                                : const Text(
-                                    'Redefinir a senha',
-                                    style: TextStyle(
+                                : Text(
+                                    'redefinir_senha'.tr,
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
                                     ),

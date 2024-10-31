@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
 import 'package:liberbox_mobile/src/recoverPassword/controller/check_phone_code_controller.dart';
@@ -52,11 +53,11 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Verificação',
-                    style: TextStyle(
+                    'verificacao'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
                       fontSize: 40,
                       fontWeight: FontWeight.w500,
@@ -70,7 +71,7 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Insira o código que foi enviado para o email $phoneNumber.',
+                    '${'insira_codigo'.tr} $phoneNumber',
                     style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
@@ -121,7 +122,7 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Campo vazio';
+                              return 'Empty field';
                             }
                             return null;
                           },
@@ -136,13 +137,13 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                   child: TextButton(
                     onPressed: () {
                       toast.showToast(
-                        message: 'Código de recuperação enviado para o e-mail.',
+                        message: 'Recovery code sent to email.',
                         isError: false,
                       );
                     },
-                    child: const Text(
-                      'Enviar novamente',
-                      style: TextStyle(
+                    child: Text(
+                      'enviar_novamente'.tr,
+                      style: const TextStyle(
                         color: Color(0xFF0369FF),
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -182,9 +183,9 @@ class _CheckPhoneCodeState extends State<CheckPhoneCode> {
                           },
                     child: checkPhoneCodeController.isLoading.value
                         ? const CircularProgressIndicator()
-                        : const Text(
-                            'Continuar',
-                            style: TextStyle(
+                        : Text(
+                            'continuar'.tr,
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.white,
                             ),

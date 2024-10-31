@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/recoverPassword/controller/send_phone_code_controller.dart';
@@ -38,13 +39,13 @@ class _SendPhoneCodeState extends State<SendPhoneCode> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Recuperar senha',
-                    style: TextStyle(
+                    'recuperar_senha'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
-                      fontSize: 40,
+                      fontSize: 35,
                       fontWeight: FontWeight.w500,
                       height: 1.2,
                       color: Colors.black,
@@ -53,11 +54,11 @@ class _SendPhoneCodeState extends State<SendPhoneCode> {
                   ),
                 ),
                 const SizedBox(height: 3),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Digite o email cadastrado no Planorama.',
-                    style: TextStyle(
+                    'email_associado'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -82,7 +83,7 @@ class _SendPhoneCodeState extends State<SendPhoneCode> {
                         // Campo de Email
                         CustomTextField(
                           icon: Icons.email_outlined,
-                          label: 'Email',
+                          label: 'email'.tr,
                           validator: emailValidator,
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -109,9 +110,9 @@ class _SendPhoneCodeState extends State<SendPhoneCode> {
                                   },
                             child: sendPhoneCodeController.isLoading.value
                                 ? const CircularProgressIndicator()
-                                : const Text(
-                                    'Continuar',
-                                    style: TextStyle(
+                                : Text(
+                                    'continuar'.tr,
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
                                     ),

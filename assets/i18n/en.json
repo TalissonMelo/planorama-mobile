@@ -1,5 +1,5 @@
 {
-  "TITLE": "Welcome",
+  "title": "Planorama",
   "DESCRIPTION": "Select the language you prefer to use.",
   "configuracao": "Settings",
   "agenda": "Schedule",
@@ -37,6 +37,7 @@
   "crie_sua_conta": "Create your account",
   "ja_tem_conta": "Already have an account?",
   "telefone": "Phone",
+  "termos_descricao" : "Welcome to our app. These terms of use govern your use of the app and its services. Please read them carefully.",
   "termos_aceitacao": "Acceptance of Terms",
   "termos_aceitacao_description": "By accessing or using the Platform in any way, you agree to comply with these Terms of Use and all policies and guidelines incorporated by reference. If you do not agree with these terms, please do not use the app.",
   "termos_privacidade": "Privacy",
@@ -96,5 +97,7 @@
   "pacientes": "Patients",
   "convites": "Invitations",
   "aceito": "Accepted",
-  "documento": "Document"
+  "documento": "Document",
+  "enviar_novamente" : "Send again",
+  "criar_descricao" : "Fill in the fields to create your account."
 }

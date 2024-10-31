@@ -26,19 +26,19 @@ class UserCodeController extends GetxController {
 
       if (result) {
         toast.showToast(
-          message: 'Usuário confirmado com sucesso!',
+          message: 'User confirmed successfully!',
           isError: false,
         );
         Get.offAllNamed(PagesRoutes.loginInRoute);
       } else {
         toast.showToast(
-          message: 'Falha ao confirmar o usuário. Tente novamente.',
+          message: 'Failed to confirm user. Please try again.',
           isError: true,
         );
       }
     } catch (e) {
       toast.showToast(
-        message: 'Erro: ${e.toString()}',
+        message: 'Error: ${e.toString()}',
         isError: true,
       );
     } finally {

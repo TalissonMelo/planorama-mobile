@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
 import 'package:liberbox_mobile/src/user/controller/user_code_controller.dart';
 
@@ -51,11 +52,11 @@ class _UserCodeState extends State<UserCode> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Verificação',
-                    style: TextStyle(
+                    'verificacao'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
                       fontSize: 40,
                       fontWeight: FontWeight.w500,
@@ -69,7 +70,7 @@ class _UserCodeState extends State<UserCode> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Insira o código que foi enviado para o email: $email.',
+                    '${'insira_codigo'.tr} $email',
                     style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
@@ -118,12 +119,6 @@ class _UserCodeState extends State<UserCode> {
                                   .requestFocus(codeFocusNodes[index - 1]);
                             }
                           },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Campo vazio';
-                            }
-                            return null;
-                          },
                         ),
                       );
                     }),
@@ -135,13 +130,13 @@ class _UserCodeState extends State<UserCode> {
                   child: TextButton(
                     onPressed: () {
                       toast.showToast(
-                        message: 'Código de confirmação enviado novamente!',
+                        message: 'Confirmation code sent again!',
                         isError: false,
                       );
                     },
-                    child: const Text(
-                      'Enviar novamente',
-                      style: TextStyle(
+                    child: Text(
+                      'reenviar_codigo'.tr,
+                      style: const TextStyle(
                         color: Color(0xFF0369FF),
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -183,9 +178,9 @@ class _UserCodeState extends State<UserCode> {
                           },
                     child: userCodeController.isLoading.value
                         ? const CircularProgressIndicator()
-                        : const Text(
-                            'Finalizar Cadastro',
-                            style: TextStyle(
+                        : Text(
+                            'continuar'.tr,
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.white,
                             ),

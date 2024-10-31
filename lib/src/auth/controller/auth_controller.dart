@@ -105,7 +105,7 @@ class AuthController extends GetxController {
   }
 
   void errorSignIn() {
-    toast.showToast(message: 'E-mail ou senha, incorretos.', isError: true);
+    toast.showToast(message: 'Incorrect email or password.', isError: true);
     isLoading.value = false;
   }
 

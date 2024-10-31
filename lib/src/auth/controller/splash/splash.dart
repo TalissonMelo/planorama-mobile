@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -13,7 +14,7 @@ class Splash extends StatelessWidget {
         child: SizedBox(
           height: size.height,
           width: size.width,
-          child: const Stack(
+          child: Stack(
             children: [
               Column(
                 children: [
@@ -21,17 +22,18 @@ class Splash extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                        padding: EdgeInsets.all(120.0),
+                        padding: const EdgeInsets.all(120.0),
                         child: Text(
-                          'Planorama',
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+                          'title'.tr,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 30),
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              Center(
+              const Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),

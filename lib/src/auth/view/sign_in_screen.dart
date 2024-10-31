@@ -40,11 +40,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Planorama',
-                    style: TextStyle(
+                    'title'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
                       fontSize: 40,
                       fontWeight: FontWeight.w500,
@@ -55,11 +55,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 const SizedBox(height: 3),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Um novo jeito de planejar seus compromissos',
-                    style: TextStyle(
+                    'login_title'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -74,9 +74,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Ainda não tem uma conta?",
-                        style: TextStyle(
+                      Text(
+                        "login_sub_title".tr,
+                        style: const TextStyle(
                           fontFamily: 'Rubik',
                           fontSize: 16,
                           fontWeight: FontWeight.w400, // Regular
@@ -94,9 +94,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           backgroundColor: Colors.transparent,
                         ),
-                        child: const Text(
-                          'Criar agora',
-                          style: TextStyle(
+                        child: Text(
+                          'criar_agora'.tr,
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Color(0xFF0369FF),
                             fontWeight: FontWeight.bold,
@@ -122,13 +122,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         CustomTextField(
                           controller: emailController,
                           icon: Icons.email_outlined,
-                          label: 'Email',
+                          label: 'email'.tr,
                           validator: emailValidator,
                         ),
                         CustomTextField(
                           controller: passwordController,
                           icon: Icons.lock_outline,
-                          label: 'Senha',
+                          label: 'senha'.tr,
                           isSecret: true,
                           validator: passwordValidator,
                         ),
@@ -139,9 +139,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             onPressed: () {
                               Get.toNamed(PagesRoutes.phoneCodeRoute);
                             },
-                            child: const Text(
-                              'Esqueci minha senha',
-                              style: TextStyle(
+                            child: Text(
+                              'esqueci_senha'.tr,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 color: Color(0xFF0369FF),
                                 fontWeight: FontWeight.bold,
@@ -173,9 +173,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                       },
                                 child: authController.isLoading.value
                                     ? const CircularProgressIndicator()
-                                    : const Text(
-                                        'Entrar agora',
-                                        style: TextStyle(
+                                    : Text(
+                                        'entrar_agora'.tr,
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
                                         ),

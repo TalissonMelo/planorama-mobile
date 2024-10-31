@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/auth/controller/splash/splash.dart';
 import 'package:liberbox_mobile/src/auth/view/sign_in_screen.dart';
-import 'package:liberbox_mobile/src/auth/view/terms.dart';
 import 'package:liberbox_mobile/src/chat/chat.dart';
 import 'package:liberbox_mobile/src/initial/base.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
@@ -10,6 +9,7 @@ import 'package:liberbox_mobile/src/recoverPassword/view/recover_password.dart';
 import 'package:liberbox_mobile/src/recoverPassword/view/send_phone_code.dart';
 import 'package:liberbox_mobile/src/sessions/view/session_page.dart';
 import 'package:liberbox_mobile/src/user/view/sign_up_screen.dart';
+import 'package:liberbox_mobile/src/user/view/terms.dart';
 import 'package:liberbox_mobile/src/user/view/user_code.dart';
 
 abstract class Pages {

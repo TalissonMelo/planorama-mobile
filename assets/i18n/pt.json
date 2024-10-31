@@ -1,5 +1,5 @@
 {
-  "TITLE": "Bem-vindo",
+  "title": "Planorama",
   "DESCRIPTION": "Selecione o idioma que você prefere usar.",
   "configuracao": "Configuração",
   "agenda": "Agenda",
@@ -14,7 +14,7 @@
   "criar_agora": "Criar agora",
   "email": "E-mail",
   "email_description": "Digite seu e-mail",
-  "senha: 'senha": "Senha",
+  "senha": "Senha",
   "senha_description": "Digite sua senha",
   "esqueci_senha": "Esqueci minha senha",
   "entrar_agora": "Entrar agora",
@@ -37,6 +37,7 @@
   "crie_sua_conta": "Crie sua conta",
   "ja_tem_conta": "Já tem uma conta?",
   "telefone": "Telefone",
+  "termos_descricao" : "Bem-vindo ao nosso aplicativo. Estes termos de uso regem o uso do aplicativo e de seus serviços. Por favor, leia-os cuidadosamente.",
   "termos_aceitacao": "Aceitação dos Termos",
   "termos_aceitacao_description": "Ao acessar ou utilizar a Plataforma de qualquer forma, você concorda em cumprir estes Termos de Uso e todas as políticas e diretrizes incorporadas por referência. Se você não concordar com estes termos, por favor, não utilize o aplicativo.",
   "termos_privacidade": "Privacidade",
@@ -96,5 +97,7 @@
   "pacientes": "Pacientes",
   "convites": "Convites",
   "aceito": "Aceito",
-  "documento": "Documento"
+  "documento": "Documento",
+  "enviar_novamente" : "Enviar novamente",
+  "criar_descricao" :  "Preencha os campos para criar sua conta."
 }

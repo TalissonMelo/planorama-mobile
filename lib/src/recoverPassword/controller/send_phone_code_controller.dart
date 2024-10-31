@@ -28,17 +28,17 @@ class SendPhoneCodeController extends GetxController {
         parameters: {'phoneNumber': email},
       );
       toast.showToast(
-        message: 'Código de recuperação enviado para o e-mail.',
+        message: 'Recovery code sent to email.',
         isError: false,
       );
     } on CognitoClientException catch (e) {
       toast.showToast(
-        message: e.message ?? 'Erro ao recuperar a senha.',
+        message: e.message ?? 'Error retrieving password.',
         isError: true,
       );
     } catch (e) {
       toast.showToast(
-        message: 'Erro inesperado. Tente novamente.',
+        message: 'Unexpected error. Please try again.',
         isError: true,
       );
     } finally {

@@ -39,13 +39,13 @@ class SignUpController extends GetxController {
 
         if (result.userConfirmed ?? false) {
           toast.showToast(
-            message: 'Usuário já confirmado! Faça login.',
+            message: 'User already confirmed! Please log in.',
             isError: false,
           );
           Get.offAllNamed(PagesRoutes.loginInRoute);
         } else {
           toast.showToast(
-            message: 'Usuário cadastrado! Verifique seu e-mail para confirmar.',
+            message: 'Registered user! Check your email to confirm.',
             isError: false,
           );
           Get.offAllNamed(PagesRoutes.userCodeRoute, parameters: {
@@ -54,7 +54,7 @@ class SignUpController extends GetxController {
         }
       } catch (e) {
         toast.showToast(
-          message: 'Erro ao cadastrar: ${e.toString()}',
+          message: 'Error registering: ${e.toString()}',
           isError: true,
         );
       } finally {
@@ -62,8 +62,7 @@ class SignUpController extends GetxController {
       }
     } else {
       toast.showToast(
-          message: 'Senhas não conferem. Por favor, tente novamente.',
-          isError: true);
+          message: 'Passwords do not match. Please try again.', isError: true);
     }
   }
 }

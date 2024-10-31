@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_returned_login.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/user/controller/sign_up_controller.dart';
+import 'package:liberbox_mobile/src/user/view/terms.dart';
 
 import '../../util/validator_email.dart';
 import '../../util/validator_name.dart';
@@ -15,6 +17,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
   final _formGlobalKey = GlobalKey<FormState>();
   final signUpController = SignUpController();
 
@@ -22,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmController = TextEditingController();
+
+  bool acceptTerms = false; // Variable to track terms acceptance
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +49,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Crie sua conta',
-                    style: TextStyle(
+                    'crie_sua_conta'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Noto Sans',
                       fontSize: 35,
                       fontWeight: FontWeight.w500,
@@ -59,11 +64,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Preencha os campos para criar sua conta.',
-                    style: TextStyle(
+                    'criar_descricao'.tr,
+                    style: const TextStyle(
                       fontFamily: 'Rubik',
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -80,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       CustomTextField(
                         icon: Icons.email,
-                        label: 'Email',
+                        label: 'email'.tr,
                         validator: emailValidator,
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -88,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 5),
                       CustomTextField(
                         icon: Icons.person,
-                        label: 'Nome',
+                        label: 'nome'.tr,
                         validator: nameValidator,
                         controller: nameController,
                         keyboardType: TextInputType.text,
@@ -96,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 5),
                       CustomTextField(
                         icon: Icons.lock,
-                        label: 'Senha',
+                        label: 'senha'.tr,
                         isSecret: true,
                         controller: passwordController,
                         validator: passwordValidator,
@@ -104,15 +109,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 5),
                       CustomTextField(
                         icon: Icons.lock,
-                        label: 'Confirme Senha',
+                        label: 'confirmar_senha'.tr,
                         isSecret: true,
                         controller: passwordConfirmController,
-                        validator: (value) {
-                          if (value != passwordController.text) {
-                            return 'As senhas não coincidem.';
-                          }
-                          return null;
-                        },
+                        validator: passwordValidator,
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: acceptTerms,
+                            onChanged: (value) {
+                              setState(() {
+                                acceptTerms = value ?? false;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(const Terms());
+                            },
+                            child: Text(
+                              '${'eu_aceito'.tr} ${'termos_de_uso'.tr}.',
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 20),
                       SizedBox(
@@ -124,7 +149,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
-                          onPressed: signUpController.isLoading.value
+                          onPressed: (signUpController.isLoading.value ||
+                                  !acceptTerms)
                               ? null
                               : () {
                                   FocusScope.of(context).unfocus();
@@ -140,9 +166,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 },
                           child: signUpController.isLoading.value
                               ? const CircularProgressIndicator()
-                              : const Text(
-                                  'Cadastrar usuário',
-                                  style: TextStyle(
+                              : Text(
+                                  'confirmar'.tr,
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
                                   ),

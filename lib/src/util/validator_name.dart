@@ -1,7 +1,7 @@
 String? nameValidator(String? name) {
-  if (name == null || name.isEmpty) return 'Digite seu nome!';
+  if (name == null || name.isEmpty) return 'Enter your name!';
 
-  if (name.split(" ").length == 1) return 'Digite seu nome completo!';
+  if (name.split(" ").length == 1) return 'Enter your full name!';
 
   return null;
 }
