@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_toast.dart';
 import 'package:liberbox_mobile/src/profile/model/user_profile_edit.dart';
 import 'package:liberbox_mobile/src/profile/service/result/user_profile_result.dart';
@@ -9,18 +10,25 @@ class UserProfileController extends GetxController {
   RxBool isLoading = false.obs;
 
   final userProfileService = UserProfileService();
+  final authController = Get.find<AuthController>();
   final utilService = UtilService();
   final toast = CustomToast();
 
   Future<void> changeProfile({
-    required String nickname,
     required String phone,
+    required String name,
+    required String document,
   }) async {
     isLoading.value = true;
 
     UserProfileResult result = await userProfileService.execute(UserProfileEdit(
-      nickname: nickname,
+      id: null,
+      userId: authController.user.id,
+      email: authController.user.email,
       phone: phone,
+      document: document,
+      nickname: authController.user.nickname,
+      name: name,
     ));
 
     result.when(success: (user) {

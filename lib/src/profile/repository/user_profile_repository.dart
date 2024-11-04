@@ -18,7 +18,6 @@ class UserProfileRepository {
         body: user.toJson(),
         headers: {
           'Authorization': token,
-          'X-UserID': userId,
         });
   }
 }

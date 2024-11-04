@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/home/home.dart';
 import 'package:liberbox_mobile/src/legend/view/legend.dart';
 import 'package:liberbox_mobile/src/notifications/view/notifications.dart';
@@ -44,11 +45,17 @@ class _BaseState extends State<Base> {
         unselectedItemColor: Colors.white.withAlpha(100),
         items: [
           const BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.description), label: 'Legenda'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.event), label: 'Agenda'),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.description),
+            label: 'legenda'.tr,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.event),
+            label: 'agenda'.tr,
+          ),
           BottomNavigationBarItem(
             icon: Stack(
               children: [
@@ -73,7 +80,7 @@ class _BaseState extends State<Base> {
                   ),
               ],
             ),
-            label: 'Notificações',
+            label: 'notificacao'.tr,
           ),
           const BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), label: 'Perfil')

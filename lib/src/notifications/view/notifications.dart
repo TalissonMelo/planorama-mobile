@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({super.key});
@@ -51,17 +52,17 @@ class Notifications extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.blue,
           centerTitle: true,
-          title: const Text(
-            'Notificações',
-            style: TextStyle(color: Colors.white),
+          title: Text(
+            'notificacao'.tr,
+            style: const TextStyle(color: Colors.white),
           ),
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.white,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white60,
             tabs: [
-              Tab(text: 'Não Lidas'),
-              Tab(text: 'Lidas'),
+              Tab(text: 'nao_lidas'.tr),
+              Tab(text: 'lidas'.tr),
             ],
           ),
         ),
@@ -79,7 +80,7 @@ class Notifications extends StatelessWidget {
     if (notifications.isEmpty) {
       return const Center(
         child: Text(
-          'Nenhuma notificação encontrada.',
+          'No notifications found.',
           style: TextStyle(fontSize: 16, color: Colors.grey),
         ),
       );

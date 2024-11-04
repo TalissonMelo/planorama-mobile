@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/legend/controller/create_legend_controller.dart';
 import 'package:liberbox_mobile/src/legend/controller/list_legend_controller.dart';
@@ -42,7 +43,10 @@ class _LegendState extends State<Legend> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
-        title: const Text('Legendas', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'legenda'.tr,
+          style: const TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -100,12 +104,12 @@ class _LegendState extends State<Legend> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Text(
-                      'Cadastrar legenda',
+                      'nova_legenda'.tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -113,7 +117,7 @@ class _LegendState extends State<Legend> {
                   ),
                   CustomTextField(
                     icon: Icons.description,
-                    label: 'Descrição',
+                    label: 'nome'.tr,
                     validator: descriptionValidator,
                     controller: descriptionController,
                     keyboardType: TextInputType.text,
@@ -123,9 +127,9 @@ class _LegendState extends State<Legend> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Column(
                         children: [
-                          const Text(
-                            'Selecione uma cor',
-                            style: TextStyle(fontSize: 16),
+                          Text(
+                            'selecionar_cor'.tr,
+                            style: const TextStyle(fontSize: 16),
                           ),
                           Expanded(
                             child: BlockPicker(
@@ -171,9 +175,9 @@ class _LegendState extends State<Legend> {
                                 Navigator.pop(context);
                               }
                             },
-                      child: const Text(
-                        'Cadastrar',
-                        style: TextStyle(
+                      child: Text(
+                        'salvar_legenda'.tr,
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),

@@ -15,16 +15,19 @@ abstract class Endpoints {
     return '$baseUrlProd/settings/users/$userId';
   }
 
-  static const String listSchedule = '$baseUrl/v1/schedule';
+  static String listSchedule(String userId) {
+    return '$baseUrlProd/schedules/users/$userId';
+  }
+
+  static String changeUserProfile(String userId) {
+    return '$baseUrlProd/users/$userId';
+  }
+
   static const String listSchedules = '$baseUrl/v1/schedules';
   static const String userProfilePermissions = '$baseUrl/v1/users/profiles';
 
   static const String listFreeTimesSchedules =
       '$baseUrl/v1/schedules/free-times';
-
-  static String changeUserProfile(String userId) {
-    return '$baseUrl/v1/users/$userId';
-  }
 
   static String sessionsToScheduleId(String scheduleId) {
     return '$baseUrl/v1/schedule/$scheduleId/sessions';

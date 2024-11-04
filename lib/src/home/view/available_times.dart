@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
 import 'package:liberbox_mobile/src/home/controller/free_time_schedule_controller.dart';
 import 'package:liberbox_mobile/src/home/domain/available_time.dart';
@@ -14,10 +15,10 @@ class _AvailableTimeState extends State<AvailableTimes> {
   int _selectedDuration = 30;
 
   final List<Map<String, dynamic>> _selectedDurations = [
-    {'value': 30, 'label': '30 minutos'},
-    {'value': 60, 'label': '1 hora'},
-    {'value': 90, 'label': '1h 30m'},
-    {'value': 120, 'label': '2 horas'},
+    {'value': 30, 'label': '30 min'},
+    {'value': 60, 'label': '1 hr'},
+    {'value': 90, 'label': '1hr 30min'},
+    {'value': 120, 'label': '2 hr'},
   ];
 
   final freeTimeScheduleController = FreeTimeScheduleController();
@@ -46,7 +47,7 @@ class _AvailableTimeState extends State<AvailableTimes> {
             padding: const EdgeInsets.all(16.0),
             child: DropdownButtonFormField<int>(
               decoration: InputDecoration(
-                labelText: 'Período disponível',
+                labelText: 'selecione_periodo'.tr,
                 labelStyle: const TextStyle(fontSize: 18.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),

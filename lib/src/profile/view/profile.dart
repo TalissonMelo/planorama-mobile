@@ -4,6 +4,7 @@ import 'package:liberbox_mobile/src/auth/controller/auth_controller.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
 import 'package:liberbox_mobile/src/profile/controller/configuration_controller.dart';
 import 'package:liberbox_mobile/src/profile/controller/user_profile_controller.dart';
+import 'package:liberbox_mobile/src/util/validator_phone.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -26,6 +27,7 @@ class _ProfileState extends State<Profile> {
   final formProfile = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
+  final documentController = TextEditingController();
 
   List<String> timeZones = [];
   String selectedTimeZone = '';
@@ -34,8 +36,6 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
-    nameController.text = authController.user.nickname ?? '';
-    phoneController.text = authController.user.nickname ?? '';
 
     tz.initializeTimeZones();
     timeZones = tz.timeZoneDatabase.locations.keys.toList();
@@ -60,7 +60,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
         title: const Text(
-          'Perfil do Usuário',
+          'Perfil',
           style: TextStyle(color: Colors.white),
         ),
         actions: [
@@ -81,33 +81,35 @@ class _ProfileState extends State<Profile> {
               children: [
                 CustomTextField(
                   icon: Icons.email_outlined,
-                  label: "Email",
+                  label: "email".tr,
                   initialValue: authController.user.email,
                   readOnly: true,
                 ),
                 CustomTextField(
                   icon: Icons.person_outline,
-                  label: "Nickname",
+                  label: "apelido".tr,
                   initialValue: authController.user.nickname,
-                  validator: nameValidator,
                   readOnly: true,
                 ),
                 CustomTextField(
                   icon: Icons.person,
-                  label: "Nome",
+                  label: "nome".tr,
                   controller: nameController,
                   keyboardType: TextInputType.text,
+                  validator: nameValidator,
                 ),
                 CustomTextField(
                   icon: Icons.phone_outlined,
-                  label: "Telefone",
+                  label: "telefone".tr,
                   inputFormatters: [phoneFormatter],
                   controller: phoneController,
                   keyboardType: TextInputType.phone,
+                  validator: phoneValidator,
                 ),
                 CustomTextField(
                   icon: Icons.file_copy,
-                  label: "CPF",
+                  label: "documento".tr,
+                  controller: documentController,
                   inputFormatters: [cpfFormatter],
                   keyboardType: TextInputType.text,
                 ),
@@ -123,9 +125,9 @@ class _ProfileState extends State<Profile> {
               ),
               onPressed:
                   userProfileController.isLoading.value ? null : _updateProfile,
-              child: const Text(
-                'Atualizar Perfil',
-                style: TextStyle(color: Colors.blue, fontSize: 18),
+              child: Text(
+                'alterar_dados'.tr,
+                style: const TextStyle(color: Colors.blue, fontSize: 18),
               ),
             ),
           ),
@@ -140,9 +142,9 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               onPressed: configuration,
-              child: const Text(
-                'Configurações',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+              child: Text(
+                'configuracao'.tr,
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
           ),
@@ -256,7 +258,7 @@ class _ProfileState extends State<Profile> {
                     onPressed: saveSettings,
                     child: Text(
                       'salvar_configuracoes'.tr,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: const TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),
@@ -293,9 +295,9 @@ class _ProfileState extends State<Profile> {
   void _updateProfile() {
     if (formProfile.currentState!.validate()) {
       userProfileController.changeProfile(
-        nickname: nameController.text,
-        phone: phoneController.text,
-      );
+          phone: phoneController.text,
+          name: nameController.text,
+          document: documentController.text);
     }
   }
 }

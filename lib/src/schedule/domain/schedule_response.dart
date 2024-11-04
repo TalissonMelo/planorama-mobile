@@ -1,14 +1,14 @@
 class ScheduleResponse {
   String id;
   String name;
-  String ownerId;
+  String userId;
   String endTime;
   String startTime;
 
   ScheduleResponse({
     required this.id,
     required this.name,
-    required this.ownerId,
+    required this.userId,
     required this.endTime,
     required this.startTime,
   });
@@ -17,7 +17,7 @@ class ScheduleResponse {
     return ScheduleResponse(
       id: map['id'],
       name: map['name'],
-      ownerId: map['ownerId'],
+      userId: map['userId'],
       endTime: map['endTime'],
       startTime: map['startTime'],
     );

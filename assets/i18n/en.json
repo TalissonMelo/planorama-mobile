@@ -99,5 +99,7 @@
   "aceito": "Accepted",
   "documento": "Document",
   "enviar_novamente" : "Send again",
-  "criar_descricao" : "Fill in the fields to create your account."
+  "criar_descricao" : "Fill in the fields to create your account.",
+  "pesquise_aqui" : "Search here...",
+  "notificacao" : "Notifications"
 }

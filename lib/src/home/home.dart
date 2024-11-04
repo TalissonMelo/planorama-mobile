@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/home/view/available_times.dart';
 import 'package:liberbox_mobile/src/home/view/registered_appointments.dart';
 
@@ -30,11 +31,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
-        title: const Column(
+        title: Column(
           children: [
             Text(
-              'liberbox',
-              style: TextStyle(color: Colors.white),
+              'title'.tr,
+              style: const TextStyle(color: Colors.white),
             ),
             /*
             Uncomment the following lines to add an image below the text.
@@ -47,14 +48,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
+          tabs: [
             Tab(
-              icon: Icon(Icons.event, color: Colors.white),
-              child: Text('Agendamentos', style: TextStyle(color: Colors.white)),
+              icon: const Icon(
+                Icons.event,
+                color: Colors.white,
+              ),
+              child: Text('agenda'.tr,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  )),
             ),
             Tab(
-              icon: Icon(Icons.schedule, color: Colors.white),
-              child: Text('Horários Disponíveis', style: TextStyle(color: Colors.white)),
+              icon: const Icon(
+                Icons.schedule,
+                color: Colors.white,
+              ),
+              child: Text('horario_disponivel'.tr,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  )),
             ),
           ],
         ),

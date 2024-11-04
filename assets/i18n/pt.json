@@ -99,5 +99,7 @@
   "aceito": "Aceito",
   "documento": "Documento",
   "enviar_novamente" : "Enviar novamente",
-  "criar_descricao" :  "Preencha os campos para criar sua conta."
+  "criar_descricao" :  "Preencha os campos para criar sua conta.",
+  "pesquise_aqui" : "Pesquise aqui...",
+  "notificacao" : "Notificações"
 }

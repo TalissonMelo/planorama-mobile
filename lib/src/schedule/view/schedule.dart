@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liberbox_mobile/src/components/custom_card.dart';
 import 'package:liberbox_mobile/src/components/custom_text_field.dart';
-import 'package:liberbox_mobile/src/member/controller/user_permission_controller.dart';
-import 'package:liberbox_mobile/src/member/domain/user_permissions.dart';
 import 'package:liberbox_mobile/src/pages_routes/entity/pages_routes.dart';
 import 'package:liberbox_mobile/src/schedule/controller/create_schedule_controller.dart';
 import 'package:liberbox_mobile/src/schedule/controller/schedule_controller.dart';
@@ -21,17 +19,13 @@ class Schedule extends StatefulWidget {
 
 class _ScheduleState extends State<Schedule> {
   final scheduleController = ScheduleController();
-  final userPermission = UserPermissionController();
-  Future<UserPermissions?>? userPermissionFuture;
   List<ScheduleResponse> schedules = [];
   List<ScheduleResponse> filteredSchedules = [];
-  UserPermissions? user;
   String searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    userPermissionFuture = listUserPermission();
     listSchedules();
   }
 
@@ -52,95 +46,80 @@ class _ScheduleState extends State<Schedule> {
     });
   }
 
-  Future<UserPermissions?> listUserPermission() async {
-    return await userPermission.userProfile();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<UserPermissions?>(
-      future: userPermissionFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (snapshot.hasError || snapshot.data == null) {
-          return const Center(child: Text("Erro ao carregar usuário"));
-        }
-
-        user = snapshot.data;
-
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue,
-            automaticallyImplyLeading: false,
-            title: const Text('Agendas', style: TextStyle(color: Colors.white)),
-            actions: user!.isValid()
-                ? [
-                    IconButton(
-                      onPressed: () async {
-                        await addSchedule(context);
-                        setState(() {});
-                      },
-                      icon: const Icon(Icons.add_circle),
-                      color: Colors.white,
-                    ),
-                  ]
-                : null,
+    return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.blue,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'agenda'.tr,
+            style: const TextStyle(color: Colors.white),
           ),
-          body: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: TextFormField(
-                  onChanged: (value) {
-                    searchQuery = value;
-                    applyFilter();
-                  },
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey.shade200,
-                      isDense: true,
-                      hintText: 'Pesquise aqui...',
-                      hintStyle:
-                          TextStyle(color: Colors.grey.shade700, fontSize: 14),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        size: 21,
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(60),
-                          borderSide: const BorderSide(
-                              width: 0, style: BorderStyle.none))),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                await addSchedule(context);
+                setState(() {});
+              },
+              icon: const Icon(Icons.add_circle),
+              color: Colors.white,
+            ),
+          ]),
+      body: scheduleController.isLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: TextFormField(
+                    onChanged: (value) {
+                      searchQuery = value;
+                      applyFilter();
+                    },
+                    decoration: InputDecoration(
+                        fillColor: Colors.grey.shade200,
+                        isDense: true,
+                        hintText: 'pesquise_aqui'.tr,
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade700, fontSize: 14),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          size: 21,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(60),
+                            borderSide: const BorderSide(
+                                width: 0, style: BorderStyle.none))),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: filteredSchedules.length,
-                  itemBuilder: (context, index) {
-                    final schedule = filteredSchedules[index];
-                    return InkWell(
-                      onTap: () {
-                        Get.toNamed(PagesRoutes.sessionsRoute,
-                            parameters: {'scheduleId': schedule.id});
-                      },
-                      child: CustomCard(
-                        title: schedule.name,
-                        start: schedule.startTime,
-                        end: schedule.endTime,
-                        isTime: true,
-                      ),
-                    );
-                  },
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: filteredSchedules.length,
+                    itemBuilder: (context, index) {
+                      final schedule = filteredSchedules[index];
+                      return InkWell(
+                        onTap: () {
+                          Get.toNamed(PagesRoutes.sessionsRoute,
+                              parameters: {'scheduleId': schedule.id});
+                        },
+                        child: CustomCard(
+                          title: schedule.name,
+                          start: schedule.startTime,
+                          end: schedule.endTime,
+                          isTime: true,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
     );
+    //   },
+    // );
   }
 
   Future<bool?> addSchedule(BuildContext context) {
@@ -167,27 +146,27 @@ class _ScheduleState extends State<Schedule> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Text(
-                      'Cadastrar Agenda',
+                      'adicionar_agenda'.tr,
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                   CustomTextField(
                       icon: Icons.description,
-                      label: 'Nome',
+                      label: 'nome'.tr,
                       validator: descriptionValidator,
                       controller: nameController,
                       keyboardType: TextInputType.text),
                   TextFormField(
                     controller: startTimeController,
                     validator: timeValidator,
-                    decoration: const InputDecoration(
-                      labelText: 'Horário Inicial',
-                      icon: Icon(Icons.access_time),
+                    decoration: InputDecoration(
+                      labelText: 'horario_inicial'.tr,
+                      icon: const Icon(Icons.access_time),
                     ),
                     keyboardType: TextInputType.datetime,
                     inputFormatters: [timeFormatter],
@@ -195,9 +174,9 @@ class _ScheduleState extends State<Schedule> {
                   TextFormField(
                     controller: endTimeController,
                     validator: timeValidator,
-                    decoration: const InputDecoration(
-                      labelText: 'Horário Final',
-                      icon: Icon(Icons.access_time),
+                    decoration: InputDecoration(
+                      labelText: 'horario_final'.tr,
+                      icon: const Icon(Icons.access_time),
                     ),
                     keyboardType: TextInputType.datetime,
                     inputFormatters: [timeFormatter],
@@ -234,9 +213,9 @@ class _ScheduleState extends State<Schedule> {
                                 Navigator.pop(context);
                               }
                             },
-                      child: const Text(
-                        'Cadastrar',
-                        style: TextStyle(
+                      child: Text(
+                        'confirmar'.tr,
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),
